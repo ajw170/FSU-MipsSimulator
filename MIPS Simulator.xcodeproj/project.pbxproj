@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		98F6B6001F78119700E62775 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 98F6B5FF1F78119700E62775 /* main.cpp */; };
+		98F6B6071F78128400E62775 /* sim.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 98F6B6061F78128400E62775 /* sim.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,7 +24,7 @@
 
 /* Begin PBXFileReference section */
 		98F6B5FC1F78119600E62775 /* MIPS Simulator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "MIPS Simulator"; sourceTree = BUILT_PRODUCTS_DIR; };
-		98F6B5FF1F78119700E62775 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		98F6B6061F78128400E62775 /* sim.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sim.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +57,7 @@
 		98F6B5FE1F78119600E62775 /* MIPS Simulator */ = {
 			isa = PBXGroup;
 			children = (
-				98F6B5FF1F78119700E62775 /* main.cpp */,
+				98F6B6061F78128400E62775 /* sim.cpp */,
 			);
 			path = "MIPS Simulator";
 			sourceTree = "<group>";
@@ -119,7 +119,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				98F6B6001F78119700E62775 /* main.cpp in Sources */,
+				98F6B6071F78128400E62775 /* sim.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,6 +169,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_CPLUSPLUSFLAGS = "-I($PROJECT_DIR)/MIPS\\ Simulator";
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -209,6 +210,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_CPLUSPLUSFLAGS = "-I($PROJECT_DIR)/MIPS\\ Simulator";
 				SDKROOT = macosx;
 			};
 			name = Release;
