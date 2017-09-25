@@ -18,6 +18,8 @@ Note that the code is self-documenting.
 
 const size_t MAXPROGRAM = 32768;
 
+void printInstSummary();
+
 int main(int argc, char * argv[])
 {
     //determine if file name was specified; otherwise, exit.
@@ -58,10 +60,47 @@ int main(int argc, char * argv[])
         inFile >> std::hex >> dataArray[i];
     }
     
+    //Done with file, close
+    inFile.close();
+    
+    //create struct to decode instructions
+    struct {
+        union   {
+            struct {
+                unsigned int funct:6;
+                unsigned int shamt:5;
+                unsigned int rd:5;
+                unsigned int rt:5;
+                unsigned int rs:5;
+                unsigned int opcode:6;
+            } rFormat;
+            struct  {
+                unsigned int imm:16;
+                unsigned int rt:5;
+                unsigned int rs:5;
+                unsigned int opcode:6;
+            } iFormat;
+            struct  {
+                unsigned int address:26;
+                unsigned int opcode:6;
+            } jFormat;
+            unsigned int encoding;
+        } u;
+    } instructions[MAXPROGRAM] = {0}; //accessed by instructions.u.rFormat, etc.
+    
+    //put program instructions into struct to allow parsing of bit field values
+    for (size_t i = 0; i < numInst; ++i)
+    {
+        instructions[i].u.encoding = progInstructions[i];
+    }
+    
+    printInstSummary();
+    
+    
+    
     
 
     
     std::cout << "Hello world!\n";
-    
     
 }

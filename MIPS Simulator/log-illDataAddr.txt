@@ -1,0 +1,44 @@
+insts:
+   0: addu	$s0,$zero,$zero
+   1: lw	$s0,1($gp)
+   2: addu	$s1,$zero,$zero
+   3: addiu	$v0,$zero,5
+   4: syscall
+   5: sw	$v0,0($gp)
+   6: lw	$s2,0($gp)
+   7: slt	$t0,$s1,$s2
+   8: beq	$t0,$zero,6
+   9: addiu	$v0,$zero,5
+  10: syscall
+  11: addu	$s0,$s0,$v0
+  12: addiu	$s1,$s1,1
+  13: j	5
+  14: addu	$a0,$s0,$zero
+  15: addiu	$v0,$zero,1
+  16: syscall
+  17: addiu	$v0,$zero,10
+  18: syscall
+
+data:
+  19: 0
+
+PC: 0
+inst: addu	$s0,$zero,$zero
+
+regs:
+   $zero =     0     $at =     0     $v0 =     0     $v1 =     0
+     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
+     $t0 =     0     $t1 =     0     $t2 =     0     $t3 =     0
+     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
+     $s0 =     0     $s1 =     0     $s2 =     0     $s3 =     0
+     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
+     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
+     $gp =    19     $sp =     0     $fp =     0     $ra =     0
+     $lo =     0     $hi =     0
+
+data memory:
+   data[  0] =     0
+
+
+PC: 1
+inst: lw	$s0,1($gp)

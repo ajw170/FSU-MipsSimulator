@@ -1,0 +1,2 @@
+insts:
+   0: addu	$s0,$zero,$zero

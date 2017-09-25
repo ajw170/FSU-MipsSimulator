@@ -23,6 +23,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		985734E11F792826003A313E /* log-divzero.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "log-divzero.txt"; sourceTree = "<group>"; };
+		985734E21F792826003A313E /* log-illDataAddr.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "log-illDataAddr.txt"; sourceTree = "<group>"; };
+		985734E31F792826003A313E /* log-illInst.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "log-illInst.txt"; sourceTree = "<group>"; };
+		985734E41F792826003A313E /* log-illInstAddr.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "log-illInstAddr.txt"; sourceTree = "<group>"; };
+		985734E51F792826003A313E /* log-illInstAddr2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "log-illInstAddr2.txt"; sourceTree = "<group>"; };
+		985734E61F792826003A313E /* sum-exceptions.obj */ = {isa = PBXFileReference; explicitFileType = text; fileEncoding = 4; path = "sum-exceptions.obj"; sourceTree = "<group>"; };
 		98F6B5FC1F78119600E62775 /* MIPS Simulator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "MIPS Simulator"; sourceTree = BUILT_PRODUCTS_DIR; };
 		98F6B6061F78128400E62775 /* sim.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sim.cpp; sourceTree = "<group>"; };
 		98F6B6081F78689300E62775 /* sum.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = sum.asm; sourceTree = "<group>"; };
@@ -60,6 +66,12 @@
 		98F6B5FE1F78119600E62775 /* MIPS Simulator */ = {
 			isa = PBXGroup;
 			children = (
+				985734E11F792826003A313E /* log-divzero.txt */,
+				985734E21F792826003A313E /* log-illDataAddr.txt */,
+				985734E31F792826003A313E /* log-illInst.txt */,
+				985734E41F792826003A313E /* log-illInstAddr.txt */,
+				985734E51F792826003A313E /* log-illInstAddr2.txt */,
+				985734E61F792826003A313E /* sum-exceptions.obj */,
 				98F6B60C1F78964900E62775 /* log.txt */,
 				98F6B60B1F7868C400E62775 /* sum.obj */,
 				98F6B6081F78689300E62775 /* sum.asm */,
