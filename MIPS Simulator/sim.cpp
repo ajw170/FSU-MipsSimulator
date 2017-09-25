@@ -1,4 +1,4 @@
-	/*
+/*
 Andrew J Wood
 CDA3101 Project 3 - MIPS Simulator
 September 24, 2017
