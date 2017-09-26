@@ -34,6 +34,7 @@
 		98F6B6081F78689300E62775 /* sum.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = sum.asm; sourceTree = "<group>"; };
 		98F6B60B1F7868C400E62775 /* sum.obj */ = {isa = PBXFileReference; explicitFileType = text; fileEncoding = 4; path = sum.obj; sourceTree = "<group>"; };
 		98F6B60C1F78964900E62775 /* log.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = log.txt; sourceTree = "<group>"; };
+		FB80398E1F7A0A5F00D8402D /* log_test.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = log_test.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +67,7 @@
 		98F6B5FE1F78119600E62775 /* MIPS Simulator */ = {
 			isa = PBXGroup;
 			children = (
+				FB80398E1F7A0A5F00D8402D /* log_test.txt */,
 				985734E11F792826003A313E /* log-divzero.txt */,
 				985734E21F792826003A313E /* log-illDataAddr.txt */,
 				985734E31F792826003A313E /* log-illInst.txt */,

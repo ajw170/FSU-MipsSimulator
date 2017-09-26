@@ -1,0 +1,22 @@
+insts:
+   0: addu
+   1: addu
+   2: addiu
+   3: syscall
+   4: sw
+   5: lw
+   6: slt
+   7: beq
+   8: addiu
+   9: syscall
+  10: addu
+  11: addiu
+  12: j
+  13: addu
+  14: addiu
+  15: syscall
+  16: addiu
+  17: syscall
+
+data:
+  18: 0

@@ -13,12 +13,17 @@ Note that the code is self-documenting.
 */
 
 #include <iostream>
+#include <iomanip>
 #include <fstream>
 #include <string>
+#include <map>
 
 const size_t MAXPROGRAM = 32768;
 
-void printInstSummary();
+//typedef support for table mappings
+typedef std::pair<const unsigned int,const std::string> codePair;
+typedef std::pair<const unsigned int, const unsigned int> opcodeFunctPair;
+typedef std::pair<const opcodeFunctPair, const std::string> codePairFunctTable;
 
 int main(int argc, char * argv[])
 {
@@ -84,6 +89,10 @@ int main(int argc, char * argv[])
                 unsigned int address:26;
                 unsigned int opcode:6;
             } jFormat;
+            struct  {
+                unsigned int address:26;
+                unsigned int opcode:6;
+            } opcodeCheck;
             unsigned int encoding;
         } u;
     } instructions[MAXPROGRAM] = {0}; //accessed by instructions.u.rFormat, etc.
@@ -94,13 +103,91 @@ int main(int argc, char * argv[])
         instructions[i].u.encoding = progInstructions[i];
     }
     
-    printInstSummary();
+    //create table of argument values mapped to corresponding string
+    std::map <const unsigned int, const std::string> argTable;
+    argTable.insert(codePair(0,"zero")); argTable.insert(codePair(1,"at")); argTable.insert(codePair(2,"v0"));
+    argTable.insert(codePair(3,"v1")); argTable.insert(codePair(4,"a0")); argTable.insert(codePair(5,"a1"));
+    argTable.insert(codePair(6,"a2")); argTable.insert(codePair(7,"a3")); argTable.insert(codePair(8,"t0"));
+    argTable.insert(codePair(9,"t1")); argTable.insert(codePair(10,"t2")); argTable.insert(codePair(11,"t3"));
+    argTable.insert(codePair(12,"t4")); argTable.insert(codePair(13,"t5")); argTable.insert(codePair(14,"t6"));
+    argTable.insert(codePair(15,"t7")); argTable.insert(codePair(16,"s0")); argTable.insert(codePair(17,"s1"));
+    argTable.insert(codePair(18,"s2")); argTable.insert(codePair(19,"s3")); argTable.insert(codePair(20,"s4"));
+    argTable.insert(codePair(21,"s5")); argTable.insert(codePair(22,"s6")); argTable.insert(codePair(23,"s7"));
+    argTable.insert(codePair(24,"t8")); argTable.insert(codePair(25,"t9")); argTable.insert(codePair(26,"k0"));
+    argTable.insert(codePair(27,"k1")); argTable.insert(codePair(28,"gp")); argTable.insert(codePair(29,"sp"));
+    argTable.insert(codePair(30,"fp")); argTable.insert(codePair(31,"ra"));
+    
+    //create table of opcode values mapped to corresponding string.
+    std::map <const opcodeFunctPair, const std::string> opcodeFunctTable;
+    opcodeFunctTable.insert(codePairFunctTable(opcodeFunctPair(9,0),"addiu"));
+    opcodeFunctTable.insert(codePairFunctTable(opcodeFunctPair(0,33),"addu"));
+    opcodeFunctTable.insert(codePairFunctTable(opcodeFunctPair(0,36),"and"));
+    opcodeFunctTable.insert(codePairFunctTable(opcodeFunctPair(4,0),"beq"));
+    opcodeFunctTable.insert(codePairFunctTable(opcodeFunctPair(5,0),"bne"));
+    opcodeFunctTable.insert(codePairFunctTable(opcodeFunctPair(0,26),"div"));
+    opcodeFunctTable.insert(codePairFunctTable(opcodeFunctPair(2,0),"j"));
+    opcodeFunctTable.insert(codePairFunctTable(opcodeFunctPair(35,0),"lw"));
+    opcodeFunctTable.insert(codePairFunctTable(opcodeFunctPair(0,16),"mfhi"));
+    opcodeFunctTable.insert(codePairFunctTable(opcodeFunctPair(0,18),"mflo"));
+    opcodeFunctTable.insert(codePairFunctTable(opcodeFunctPair(0,24),"mult"));
+    opcodeFunctTable.insert(codePairFunctTable(opcodeFunctPair(0,37),"or"));
+    opcodeFunctTable.insert(codePairFunctTable(opcodeFunctPair(0,42),"slt"));
+    opcodeFunctTable.insert(codePairFunctTable(opcodeFunctPair(0,35),"subu"));
+    opcodeFunctTable.insert(codePairFunctTable(opcodeFunctPair(43,0),"sw"));
+    opcodeFunctTable.insert(codePairFunctTable(opcodeFunctPair(0,12),"syscall"));
+    
+    /*
+    //Test harness only
+    std::cout << "Test of opcodeFunctTable:\n";
+    std::cout << "Finding (0,0) in table: " << opcodeFunctTable.count(opcodeFunctPair(0,0)) << "\n";
+    std::cout << "Finding (0,1) in table: " << opcodeFunctTable.count(opcodeFunctPair(0,1)) << "\n";
+    std::cout << "Finding (1,2) in table: " << opcodeFunctTable.count(opcodeFunctPair(1,2)) << "\n";
+    std::cout << "Value of (0,0) is: " << opcodeFunctTable[opcodeFunctPair(0,0)];
+    */
     
     
+    //prepare text output file
+    std::ofstream outFile("log_test.txt",std::ios::out);
+    outFile.seekp(std::ios::beg);
     
+    outFile << "insts:\n";
     
+    //print instructions
+    for (size_t i = 0; i < numInst; ++i)
+    {
+        //determine opcodeFunct pair
+        unsigned int opcode = instructions[i].u.opcodeCheck.opcode;
+        unsigned int funct = 0;  //funct will be 0 unless opcode is 0
+        
+        //determine if the instsruction is an "R" instruction, then determine if the funct pair is valid
+        //provided it is an "R" instruction.
+        if (opcode == 0)
+        {
+            funct = instructions[i].u.rFormat.funct;
+            size_t validOpcodeFunct = opcodeFunctTable.count(opcodeFunctPair(0,funct));
+            if (!validOpcodeFunct)
+            {
+                std::cerr << "could not find inst with opcode " << opcode << " and funct " << funct;
+                outFile.close();
+                exit(EXIT_FAILURE);
+            }
+        }
+        
+        outFile << std::setw(4) << std::right;
+        outFile << i << ": " << opcodeFunctTable[opcodeFunctPair(opcode,funct)] << "\n";
+    }
+    
+    //print data
+    outFile << "\ndata:\n";
+    
+    for (size_t i = 0; i < numWords; ++i)
+    {
+        outFile << std::setw(4) << std::right;
+        outFile << (i+numInst) << ": " << dataArray[i] << "\n";
+    }
+    
+    outFile.close();
 
-    
     std::cout << "Hello world!\n";
     
 }
