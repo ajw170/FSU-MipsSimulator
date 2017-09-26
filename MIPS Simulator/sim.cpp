@@ -16,6 +16,7 @@ Note that the code is self-documenting.
 #include <iomanip>
 #include <fstream>
 #include <string>
+#include <vector>
 #include <map>
 
 const size_t MAXPROGRAM = 32768;
@@ -24,6 +25,9 @@ const size_t MAXPROGRAM = 32768;
 typedef std::pair<const unsigned int,const std::string> codePair;
 typedef std::pair<const unsigned int, const unsigned int> opcodeFunctPair;
 typedef std::pair<const opcodeFunctPair, const std::string> codePairFunctTable;
+
+void printRegisterState(std::vector<int> &, std::ofstream &);
+void printDataMemory(unsigned int *, size_t, std::ofstream &);
 
 int main(int argc, char * argv[])
 {
@@ -145,10 +149,14 @@ int main(int argc, char * argv[])
     std::cout << "Value of (0,0) is: " << opcodeFunctTable[opcodeFunctPair(0,0)];
     */
     
+    /* Part 1 - Instruction reading and parsing */
     
     //prepare text output file
     std::ofstream outFile("log_test.txt",std::ios::out);
     outFile.seekp(std::ios::beg);
+    
+    //prepare instruction storage vector
+    std::vector<std::string> instStorage (numInst,"");
     
     outFile << "insts:\n";
     
@@ -174,8 +182,104 @@ int main(int argc, char * argv[])
         }
         
         outFile << std::setw(4) << std::right;
-        outFile << i << ": " << opcodeFunctTable[opcodeFunctPair(opcode,funct)] << "\n";
-    }
+        outFile << i << ": ";
+    
+        std::string instString; //string to store instructions
+        instString += opcodeFunctTable[opcodeFunctPair(opcode,funct)];
+        
+        //determine sequence to ouput
+        //separate by opcode using switch statement
+        switch(opcode)
+        {
+            case 0:
+                switch(funct)
+                {
+                    case 33:
+                    case 36:
+                    case 37:
+                    case 42:
+                    case 35:
+                        instString += "\t";
+                        instString += "$";
+                        instString += argTable[instructions[i].u.rFormat.rd];
+                        instString += ",$";
+                        instString += argTable[instructions[i].u.rFormat.rs];
+                        instString += ",$";
+                        instString += argTable[instructions[i].u.rFormat.rt];
+                        //add this string to the vector
+                        instStorage[i] += instString;
+                        break;
+                    case 26:
+                    case 24:
+                        instString += "\t";
+                        instString += "$";
+                        instString += argTable[instructions[i].u.rFormat.rs];
+                        instString += ",$";
+                        instString += argTable[instructions[i].u.rFormat.rt];
+                        //add this string to the vector
+                        instStorage[i] += instString;
+                        break;
+                    case 12: //syscall case
+                        instStorage[i] += instString;
+                        break;
+                    case 16:
+                    case 18:
+                        instString += "\t";
+                        instString += "$";
+                        instString += argTable[instructions[i].u.rFormat.rd];
+                        instStorage[i] += instString;
+                        break;
+                    default:
+                        break;
+                }
+                break;
+            case 9:
+                instString += "\t";
+                instString += "$";
+                instString += argTable[instructions[i].u.iFormat.rt];
+                instString += ",$";
+                instString += argTable[instructions[i].u.iFormat.rs];
+                instString += ",";
+                instString += std::to_string(instructions[i].u.iFormat.imm);
+                instStorage[i] += instString;
+                break;
+            case 4:
+            case 5:
+                instString += "\t";
+                instString += "$";
+                instString += argTable[instructions[i].u.iFormat.rs];
+                instString += ",$";
+                instString += argTable[instructions[i].u.iFormat.rt];
+                instString += ",";
+                instString += std::to_string(instructions[i].u.iFormat.imm);
+                instStorage[i] += instString;
+                break;
+            case 2:
+                instString += " ";
+                instString += std::to_string(instructions[i].u.jFormat.address);
+                instStorage[i] += instString;
+                break;
+            case 35:
+            case 43:
+                instString += "\t";
+                instString += "$";
+                instString += argTable[instructions[i].u.iFormat.rt];
+                instString += ",";
+                instString += std::to_string(instructions[i].u.iFormat.imm);
+                instString += "($";
+                instString += argTable[instructions[i].u.iFormat.rs];
+                instString += ")";
+                instStorage[i] += instString;
+                break;
+            default:
+                std::cerr << "Invalid opcode / funct cominbation";
+                exit(EXIT_FAILURE);
+                break;
+        }
+        
+        outFile << instStorage[i];
+        outFile << "\n";
+    } //end of instruction storage section
     
     //print data
     outFile << "\ndata:\n";
@@ -184,10 +288,138 @@ int main(int argc, char * argv[])
     {
         outFile << std::setw(4) << std::right;
         outFile << (i+numInst) << ": " << dataArray[i] << "\n";
+    } //end of data display section
+    
+    outFile << "\n";
+    
+    
+    /* Part 2 - MIPS Simulator with logged output */
+    
+    //prepare program counter
+    unsigned int progCounter = 0;
+
+    //create vector to store 32 register values plus "lo" and "hi" (34 total) - intialize all to zero.
+    std::vector<int> registerStore(34,0);
+    
+    //initialize $gp to beginning of data area
+    registerStore[28] = static_cast<int>(numInst);
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    //exit the program when one of the two conditions is true:
+    //(1) a syscall with value 10 in the v0 register is encountered
+    //(2) the program counter goes past the last valid instruction
+    unsigned int opcode = 0;
+    unsigned int funct = 0;
+    int vzero;
+    
+    //only perform opcode check if PC is not exceeded
+    if (progCounter < numInst)
+    {
+        opcode = instructions[progCounter].u.opcodeCheck.opcode;
+            if (opcode == 0)
+                funct = instructions[progCounter].u.rFormat.funct;
     }
     
-    outFile.close();
-
-    std::cout << "Hello world!\n";
+    vzero = registerStore[2];
     
+    bool exitCondition = ((opcode == 0 && funct == 12 && vzero == 10) || (progCounter >= numInst));
+    
+    if (exitCondition)
+    {
+        outFile << "exiting simulator";
+    }
+    
+    
+    
+    
+    printRegisterState(registerStore,outFile);
+    outFile << "\n\n";
+    printDataMemory(dataArray,numWords,outFile);
+    
+    
+    
+    outFile.close();
+    std::cout << "Hello world!\n";
 }
+
+void printRegisterState(std::vector<int> & registerStore, std::ofstream & outFile)
+{
+    outFile << std::left << "regs:\n";
+    outFile << std::right;
+    outFile << std::setw(10) << "$zero =" << std::setw(6) << registerStore[0];
+    outFile << std::setw(10) << "$at =" << std::setw(6) << registerStore[1];
+    outFile << std::setw(10) << "$v0 =" << std::setw(6) << registerStore[2];
+    outFile << std::setw(10) << "$v1 =" << std::setw(6) << registerStore[3] << "\n";
+    outFile << std::setw(10) << "$a0 =" << std::setw(6) << registerStore[4];
+    outFile << std::setw(10) << "$a1 =" << std::setw(6) << registerStore[5];
+    outFile << std::setw(10) << "$a2 =" << std::setw(6) << registerStore[6];
+    outFile << std::setw(10) << "$a3 =" << std::setw(6) << registerStore[7] << "\n";
+    outFile << std::setw(10) << "$t0 =" << std::setw(6) << registerStore[8];
+    outFile << std::setw(10) << "$t1 =" << std::setw(6) << registerStore[9];
+    outFile << std::setw(10) << "$t2 =" << std::setw(6) << registerStore[10];
+    outFile << std::setw(10) << "$t3 =" << std::setw(6) << registerStore[11] << "\n";
+    outFile << std::setw(10) << "$t4 =" << std::setw(6) << registerStore[12];
+    outFile << std::setw(10) << "$t5 =" << std::setw(6) << registerStore[13];
+    outFile << std::setw(10) << "$t6 =" << std::setw(6) << registerStore[14];
+    outFile << std::setw(10) << "$t7 =" << std::setw(6) << registerStore[15] << "\n";
+    outFile << std::setw(10) << "$s0 =" << std::setw(6) << registerStore[16];
+    outFile << std::setw(10) << "$s1 =" << std::setw(6) << registerStore[17];
+    outFile << std::setw(10) << "$s2 =" << std::setw(6) << registerStore[18];
+    outFile << std::setw(10) << "$s3 =" << std::setw(6) << registerStore[19] << "\n";
+    outFile << std::setw(10) << "$s4 =" << std::setw(6) << registerStore[20];
+    outFile << std::setw(10) << "$s5 =" << std::setw(6) << registerStore[21];
+    outFile << std::setw(10) << "$s6 =" << std::setw(6) << registerStore[22];
+    outFile << std::setw(10) << "$s7 =" << std::setw(6) << registerStore[23] << "\n";
+    outFile << std::setw(10) << "$t8 =" << std::setw(6) << registerStore[24];
+    outFile << std::setw(10) << "$t9 =" << std::setw(6) << registerStore[25];
+    outFile << std::setw(10) << "$k0 =" << std::setw(6) << registerStore[26];
+    outFile << std::setw(10) << "$k1 =" << std::setw(6) << registerStore[27] << "\n";
+    outFile << std::setw(10) << "$gp =" << std::setw(6) << registerStore[28];
+    outFile << std::setw(10) << "$sp =" << std::setw(6) << registerStore[29];
+    outFile << std::setw(10) << "$fp =" << std::setw(6) << registerStore[30];
+    outFile << std::setw(10) << "$ra =" << std::setw(6) << registerStore[31] << "\n";
+    outFile << std::setw(10) << "$lo =" << std::setw(6) << registerStore[32];
+    outFile << std::setw(10) << "$hi =" << std::setw(6) << registerStore[33];
+}
+
+void printDataMemory(unsigned int * dataArray, size_t numWords, std::ofstream & outFile)
+{
+    outFile << std::left << "data memory:\n";
+    outFile << std::right;
+    
+    for (size_t i = 0; i < numWords; ++i)
+    {
+        outFile << std::setw(8) << "data[";
+        outFile << std::setw(3) << i;
+        outFile << "] =";
+        outFile << std::setw(6) << dataArray[i];
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

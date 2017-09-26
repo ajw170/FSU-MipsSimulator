@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MIPS Simulator/sim.cpp"
-            timestampString = "528092790.676321"
+            timestampString = "528154848.961313"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "191"
-            endingLineNumber = "191"
+            startingLineNumber = "164"
+            endingLineNumber = "164"
             landmarkName = "main(int argc, char * argv[])"
             landmarkType = "9">
          </BreakpointContent>
@@ -22,15 +22,31 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MIPS Simulator/sim.cpp"
-            timestampString = "528092724.858306"
+            timestampString = "528154848.961313"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "150"
-            endingLineNumber = "150"
+            startingLineNumber = "280"
+            endingLineNumber = "280"
+            landmarkName = "main(int argc, char * argv[])"
+            landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MIPS Simulator/sim.cpp"
+            timestampString = "528154848.961313"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "302"
+            endingLineNumber = "302"
             landmarkName = "main(int argc, char * argv[])"
             landmarkType = "9">
          </BreakpointContent>
