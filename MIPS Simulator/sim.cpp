@@ -184,6 +184,7 @@ int main(int argc, char * argv[])
         outFile << std::setw(4) << std::right;
         outFile << i << ": ";
     
+        
         std::string instString; //string to store instructions
         instString += opcodeFunctTable[opcodeFunctPair(opcode,funct)];
         
@@ -232,7 +233,7 @@ int main(int argc, char * argv[])
                     default:
                         break;
                 }
-                break;
+                break; //opcode 0
             case 9:
                 instString += "\t";
                 instString += "$";
@@ -251,7 +252,7 @@ int main(int argc, char * argv[])
                 instString += ",$";
                 instString += argTable[instructions[i].u.iFormat.rt];
                 instString += ",";
-                instString += std::to_string(instructions[i].u.iFormat.imm);
+                instString += std::to_string(static_cast<short>((instructions[i].u.iFormat.imm)));
                 instStorage[i] += instString;
                 break;
             case 2:
@@ -314,9 +315,9 @@ int main(int argc, char * argv[])
         unsigned int rd;
         unsigned int rs;
         unsigned int rt;
-        unsigned int imm;
+        unsigned short imm;
         unsigned int address;
-        int immSigned; //used to determine validity of branch
+        short immSigned; //used to determine validity of branch
         int addressSigned; //used to determine validity of jump (protect against negative)
         int addrLoadStore; //used to faciliate loading and storing of words
         
@@ -481,7 +482,7 @@ int main(int argc, char * argv[])
                 rs = instructions[progCounter].u.iFormat.rs;
                 rt = instructions[progCounter].u.iFormat.rt;
                 imm = instructions[progCounter].u.iFormat.imm;
-                immSigned = static_cast<int>(imm);
+                immSigned = static_cast<short>(imm);
                 if (registerStore[rs] == registerStore[rt])
                 {
                     //check if the branch would result in an invalid PC target
@@ -513,7 +514,7 @@ int main(int argc, char * argv[])
                 rs = instructions[progCounter].u.iFormat.rs;
                 rt = instructions[progCounter].u.iFormat.rt;
                 imm = instructions[progCounter].u.iFormat.imm;
-                immSigned = static_cast<int>(imm);
+                immSigned = static_cast<short>(imm);
                 if (registerStore[rs] != registerStore[rt])
                 {
                     //check if the branch would result in an invalid PC target
@@ -566,7 +567,7 @@ int main(int argc, char * argv[])
             case 35: //lw instruction
                 outFile << "inst: " << instStorage[progCounter] << "\n";
                 imm = instructions[progCounter].u.iFormat.imm;
-                immSigned = static_cast<int>(imm);
+                immSigned = static_cast<short>(imm);
                 rt = instructions[progCounter].u.iFormat.rt; //destination
                 rs = instructions[progCounter].u.iFormat.rs; //the base register
                 
@@ -588,7 +589,7 @@ int main(int argc, char * argv[])
             case 43: //sw instruction  sw $s0,0($gp)
                 outFile << "inst: " << instStorage[progCounter] << "\n";
                 imm = instructions[progCounter].u.iFormat.imm;
-                immSigned = static_cast<int>(imm);
+                immSigned = static_cast<short>(imm);
                 rt = instructions[progCounter].u.iFormat.rt; //where word is to be taken from
                 rs = instructions[progCounter].u.iFormat.rs; //the base register
                 
