@@ -35,6 +35,7 @@
 		98F6B60B1F7868C400E62775 /* sum.obj */ = {isa = PBXFileReference; explicitFileType = text; fileEncoding = 4; path = sum.obj; sourceTree = "<group>"; };
 		98F6B60C1F78964900E62775 /* log.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = log.txt; sourceTree = "<group>"; };
 		FB80398E1F7A0A5F00D8402D /* log_test.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = log_test.txt; sourceTree = "<group>"; };
+		FBFED9E71F7C60D00067CCB2 /* sum_long_andrew.obj */ = {isa = PBXFileReference; explicitFileType = text; fileEncoding = 4; path = sum_long_andrew.obj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +79,7 @@
 				98F6B60B1F7868C400E62775 /* sum.obj */,
 				98F6B6081F78689300E62775 /* sum.asm */,
 				98F6B6061F78128400E62775 /* sim.cpp */,
+				FBFED9E71F7C60D00067CCB2 /* sum_long_andrew.obj */,
 			);
 			path = "MIPS Simulator";
 			sourceTree = "<group>";

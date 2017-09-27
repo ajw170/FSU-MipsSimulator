@@ -683,6 +683,7 @@ void printDataMemory(unsigned int * dataArray, size_t numWords, std::ofstream & 
         outFile << std::setw(3) << i;
         outFile << "] =";
         outFile << std::setw(6) << dataArray[i];
+        outFile << "\n";
     }
 }
 
