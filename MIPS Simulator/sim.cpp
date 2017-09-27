@@ -276,7 +276,6 @@ int main(int argc, char * argv[])
                 exit(EXIT_FAILURE);
                 break;
         }
-        
         outFile << instStorage[i];
         outFile << "\n";
     } //end of instruction storage section
@@ -296,7 +295,7 @@ int main(int argc, char * argv[])
     /* Part 2 - MIPS Simulator with logged output */
     
     //prepare program counter
-    unsigned int progCounter = 0;
+    int progCounter = 0;
 
     //create vector to store 32 register values plus "lo" and "hi" (34 total) - intialize all to zero.
     std::vector<int> registerStore(34,0);
@@ -304,55 +303,338 @@ int main(int argc, char * argv[])
     //initialize $gp to beginning of data area
     registerStore[28] = static_cast<int>(numInst);
     
+    bool exitCondition = (progCounter >= numInst);
     
-    
-    
-    
-    
-    
-    
-    
-    
-    //exit the program when one of the two conditions is true:
-    //(1) a syscall with value 10 in the v0 register is encountered
-    //(2) the program counter goes past the last valid instruction
-    unsigned int opcode = 0;
-    unsigned int funct = 0;
-    int vzero;
-    
-    //only perform opcode check if PC is not exceeded
-    if (progCounter < numInst)
+    while (!exitCondition)
     {
-        opcode = instructions[progCounter].u.opcodeCheck.opcode;
-            if (opcode == 0)
-                funct = instructions[progCounter].u.rFormat.funct;
-    }
+        outFile << "PC: " << progCounter << "\n";
+        
+        unsigned int opcode = instructions[progCounter].u.opcodeCheck.opcode;
+        unsigned int funct = 0;
+        unsigned int rd;
+        unsigned int rs;
+        unsigned int rt;
+        unsigned int imm;
+        unsigned int address;
+        int immSigned; //used to determine validity of branch
+        int addressSigned; //used to determine validity of jump (protect against negative)
+        int addrLoadStore; //used to faciliate loading and storing of words
+        
+        struct {
+            union {
+                struct {
+                    long lower:32;
+                    long upper:32;
+                } divLong;
+                struct {
+                    long full;
+                } fullLong;
+            } u;
+        } longAssist;
     
-    vzero = registerStore[2];
+        if (opcode == 0)
+            funct = instructions[progCounter].u.rFormat.funct;
+        
+        switch(opcode)
+        {
+            case 0:
+                switch(funct)
+                {
+                    case 33: //addu instruction
+                        outFile << "inst: " << instStorage[progCounter] << "\n";
+                        rd = instructions[progCounter].u.rFormat.rd;
+                        if (rd != 0) //prevent the $zero register from being written to
+                        {
+                            rs = instructions[progCounter].u.rFormat.rs;
+                            rt = instructions[progCounter].u.rFormat.rt;
+                            registerStore[rd] = registerStore[rs] + registerStore[rt];
+                        }
+                        ++progCounter;
+                        break;
+                    
+                    case 36: //and instruction
+                        outFile << "inst: " << instStorage[progCounter] << "\n";
+                        rd = instructions[progCounter].u.rFormat.rd;
+                        if (rd != 0) //prevent the $zero register from being written to
+                        {
+                            rs = instructions[progCounter].u.rFormat.rs;
+                            rt = instructions[progCounter].u.rFormat.rt;
+                            registerStore[rd] = registerStore[rs] & registerStore[rt];
+                        }
+                        ++progCounter;
+                        break;
+
+                    case 37: //or instruction
+                        outFile << "inst: " << instStorage[progCounter] << "\n";
+                        rd = instructions[progCounter].u.rFormat.rd;
+                        if (rd != 0) //prevent the $zero register from being written to
+                        {
+                            rs = instructions[progCounter].u.rFormat.rs;
+                            rt = instructions[progCounter].u.rFormat.rt;
+                            registerStore[rd] = registerStore[rs] | registerStore[rt];
+                        }
+                        ++progCounter;
+                        break;
+                        
+                    case 42: //slt instruction
+                        outFile << "inst: " << instStorage[progCounter] << "\n";
+                        rd = instructions[progCounter].u.rFormat.rd;
+                        if (rd != 0) //prevent the $zero register from being written to
+                        {
+                            rs = instructions[progCounter].u.rFormat.rs;
+                            rt = instructions[progCounter].u.rFormat.rt;
+                            registerStore[rd] = (registerStore[rs] < registerStore[rt]);
+                        }
+                        ++progCounter;
+                        break;
+                        
+                    case 35: //subu instruction
+                        outFile << "inst: " << instStorage[progCounter] << "\n";
+                        rd = instructions[progCounter].u.rFormat.rd;
+                        if (rd != 0) //prevent the $zero register from being written to
+                        {
+                            rs = instructions[progCounter].u.rFormat.rs;
+                            rt = instructions[progCounter].u.rFormat.rt;
+                            registerStore[rd] = registerStore[rs] - registerStore[rt];
+                        }
+                        ++progCounter;
+                        break;
+                        
+                    case 26: //div instruction
+                        outFile << "inst: " << instStorage[progCounter] << "\n";
+                        rt = instructions[progCounter].u.rFormat.rt;
+                        if (registerStore[rt] == 0) //prevent divide by zero
+                        {
+                            std::cerr << "divide by zero for instruction at " << progCounter;
+                            exit(EXIT_FAILURE);
+                        }
+                        rs = instructions[progCounter].u.rFormat.rs;
+                        registerStore[32] = registerStore[rs] / registerStore[rt]; //put quotient in lo
+                        registerStore[33] = registerStore[rs] % registerStore[rt]; //put remainder in hi
+                        ++progCounter;
+                        break;
+                        
+                    case 24: // mult instruction
+                        outFile << "inst: " << instStorage[progCounter] << "\n";
+                        rt = instructions[progCounter].u.rFormat.rt;
+                        rs = instructions[progCounter].u.rFormat.rs;
+                        longAssist.u.fullLong.full = registerStore[rs] * registerStore[rt];
+                        registerStore[32] = longAssist.u.divLong.lower; //put low order word in lo
+                        registerStore[33] = longAssist.u.divLong.upper; //put high order word in hi
+                        ++progCounter;
+                        break;
+                        
+                    case 12: //syscall case - v0 is either 1, 5; otherwise ignore and exit condition is tested later
+                        outFile << "inst: " << instStorage[progCounter] << "\n";
+                        if (registerStore[2] == 1)
+                        {
+                            std::cout << registerStore[4] << "\n";
+                        }
+                        if (registerStore[2] == 5)
+                        {
+                            std::cin >> registerStore[2];
+                        }
+                        ++progCounter;
+                        break;
+                        
+                    case 16: //mfhi instruction - move hi register to rd
+                        outFile << "inst: " << instStorage[progCounter] << "\n";
+                        rd = instructions[progCounter].u.rFormat.rd;
+                        if (rd != 0) //prevent the zero register from being written to
+                        {
+                            registerStore[rd] = registerStore[33];
+                        }
+                        ++progCounter;
+                        break;
+                
+                    case 18: //mflo instuction - move lo register to rd
+                        outFile << "inst: " << instStorage[progCounter] << "\n";
+                        rd = instructions[progCounter].u.rFormat.rd;
+                        if (rd != 0) //prevent the zero register from being written to
+                        {
+                            registerStore[rd] = registerStore[32];
+                        }
+                        ++progCounter;
+                        break;
+                        
+                    default: //the program should never reach this point
+                        std::cerr << "Something was wrong.";
+                        outFile.close();
+                        exit(EXIT_FAILURE);
+                        break;
+                }
+                break; //case if opcode 0
+                
+            case 9: //addiu instruction
+                outFile << "inst: " << instStorage[progCounter] << "\n";
+                rt = instructions[progCounter].u.iFormat.rt;
+                if (rt != 0) //prevent the zero register from being written to
+                {
+                    rs = instructions[progCounter].u.iFormat.rs;
+                    imm = instructions[progCounter].u.iFormat.imm;
+                    registerStore[rt] = registerStore[rs] + imm;
+                }
+                ++progCounter;
+                break;
+                
+            case 4: //beq instruction
+                rs = instructions[progCounter].u.iFormat.rs;
+                rt = instructions[progCounter].u.iFormat.rt;
+                imm = instructions[progCounter].u.iFormat.imm;
+                immSigned = static_cast<int>(imm);
+                if (registerStore[rs] == registerStore[rt])
+                {
+                    //check if the branch would result in an invalid PC target
+                    if ( ((progCounter + immSigned) > (numInst - 1)) || ((progCounter + immSigned) < 0)  )
+                    {
+                        //check if PC is accessing data memory
+                        if ((progCounter + immSigned) <= (numInst + numWords - 1))
+                        {
+                            std::cerr << "PC is accessing data memory at address " << (progCounter + immSigned);
+                        }
+                        else
+                        {
+                            std::cerr << "PC is accessing illegal memory address " << (progCounter + immSigned);
+                        }
+                        outFile.close();
+                        exit(EXIT_FAILURE);
+                    }
+                    outFile << "inst: " << instStorage[progCounter] << "\n";
+                    progCounter += immSigned;
+                }
+                else
+                {
+                    outFile << "inst: " << instStorage[progCounter] << "\n";
+                    ++progCounter;
+                }
+                break;
+                
+            case 5: //bne instruction
+                rs = instructions[progCounter].u.iFormat.rs;
+                rt = instructions[progCounter].u.iFormat.rt;
+                imm = instructions[progCounter].u.iFormat.imm;
+                immSigned = static_cast<int>(imm);
+                if (registerStore[rs] != registerStore[rt])
+                {
+                    //check if the branch would result in an invalid PC target
+                    if ( ((progCounter + immSigned) > (numInst - 1)) || ((progCounter + immSigned) < 0)  )
+                    {
+                        //check if PC is accessing data memory
+                        if ((progCounter + immSigned) <= (numInst + numWords - 1))
+                        {
+                            std::cerr << "PC is accessing data memory at address " << (progCounter + immSigned);
+                        }
+                        else
+                        {
+                            std::cerr << "PC is accessing illegal memory address " << (progCounter + immSigned);
+                        }
+                        outFile.close();
+                        exit(EXIT_FAILURE);
+                    }
+                    outFile << "inst: " << instStorage[progCounter] << "\n";
+                    progCounter += immSigned;
+                }
+                else
+                {
+                    outFile << "inst: " << instStorage[progCounter] << "\n";
+                    ++progCounter;
+                }
+                break;
+                
+            case 2: //j instruction
+                address = instructions[progCounter].u.jFormat.address;
+                addressSigned = static_cast<int>(address);
+                //check if jump would result in an invalid PC target
+                if ( (addressSigned > (numInst - 1)) || (addressSigned < 0) )
+                {
+                    //check if PC is accessing data memory
+                    if ( address < (numInst + numWords) )
+                    {
+                        std::cerr << "PC is accessing data memory at address " << addressSigned;
+                    }
+                    else
+                    {
+                        std::cerr << "PC is accessing illegal memory address " << addressSigned;
+                    }
+                    outFile.close();
+                    exit(EXIT_FAILURE);
+                }
+                outFile << "inst: " << instStorage[progCounter] << "\n";
+                progCounter = addressSigned;
+                break;
     
-    bool exitCondition = ((opcode == 0 && funct == 12 && vzero == 10) || (progCounter >= numInst));
+            case 35: //lw instruction
+                outFile << "inst: " << instStorage[progCounter] << "\n";
+                imm = instructions[progCounter].u.iFormat.imm;
+                immSigned = static_cast<int>(imm);
+                rt = instructions[progCounter].u.iFormat.rt; //destination
+                rs = instructions[progCounter].u.iFormat.rs; //the base register
+                
+                addrLoadStore = registerStore[rs] + immSigned;
+                //first check to ensure load address is valid
+                if ((addrLoadStore < (numInst)) || (addrLoadStore >= (numInst + numWords)))
+                {
+                    std::cerr << "Load outside of data memory at address " << addrLoadStore;
+                    outFile.close();
+                    exit(EXIT_FAILURE);
+                }
+                if (rt != 0) //prevent zero register from being written to
+                {
+                    registerStore[rt] = dataArray[addrLoadStore - numInst];
+                }
+                ++progCounter;
+                break;
+                
+            case 43: //sw instruction  sw $s0,0($gp)
+                outFile << "inst: " << instStorage[progCounter] << "\n";
+                imm = instructions[progCounter].u.iFormat.imm;
+                immSigned = static_cast<int>(imm);
+                rt = instructions[progCounter].u.iFormat.rt; //where word is to be taken from
+                rs = instructions[progCounter].u.iFormat.rs; //the base register
+                
+                addrLoadStore = registerStore[rs] + immSigned;
+                //first check to ensure load address is valid
+                if ((addrLoadStore < (numInst)) || (addrLoadStore >= (numInst + numWords)))
+                {
+                    std::cerr << "Store outside of data memory at address " << addrLoadStore;
+                    outFile.close();
+                    exit(EXIT_FAILURE);
+                }
+                dataArray[addrLoadStore - numInst] = registerStore[rt];
+                ++progCounter;
+                break;
+
+            default: //the program should never reach this point
+                std::cerr << "Something went wrong.";
+                outFile.close();
+                exit(EXIT_FAILURE);
+                break;
+        } //end switch (opcode)
+        
+        //exit the program when one of the two conditions is true:
+        //(1) a syscall with value 10 in the v0 register is encountered
+        //(2) the program counter goes past the last valid instruction
+        int vzero;
+        vzero = registerStore[2];
+        exitCondition = ((opcode == 0 && funct == 12 && vzero == 10) || (progCounter >= numInst));
+        
+        if (!exitCondition)
+        {
+            printRegisterState(registerStore,outFile);
+            outFile << "\n\n";
+            printDataMemory(dataArray,numWords,outFile);
+            outFile << "\n\n";
+        }
+
+    } //end while (!exitCondition)
     
-    if (exitCondition)
-    {
-        outFile << "exiting simulator";
-    }
-    
-    
-    
-    
-    printRegisterState(registerStore,outFile);
-    outFile << "\n\n";
-    printDataMemory(dataArray,numWords,outFile);
-    
-    
-    
+    outFile << "exiting simulator";
     outFile.close();
-    std::cout << "Hello world!\n";
 }
 
 void printRegisterState(std::vector<int> & registerStore, std::ofstream & outFile)
 {
-    outFile << std::left << "regs:\n";
+    outFile << std::left << "\nregs:\n";
     outFile << std::right;
     outFile << std::setw(10) << "$zero =" << std::setw(6) << registerStore[0];
     outFile << std::setw(10) << "$at =" << std::setw(6) << registerStore[1];
