@@ -140,15 +140,6 @@ int main(int argc, char * argv[])
     opcodeFunctTable.insert(codePairFunctTable(opcodeFunctPair(43,0),"sw"));
     opcodeFunctTable.insert(codePairFunctTable(opcodeFunctPair(0,12),"syscall"));
     
-    /*
-    //Test harness only
-    std::cout << "Test of opcodeFunctTable:\n";
-    std::cout << "Finding (0,0) in table: " << opcodeFunctTable.count(opcodeFunctPair(0,0)) << "\n";
-    std::cout << "Finding (0,1) in table: " << opcodeFunctTable.count(opcodeFunctPair(0,1)) << "\n";
-    std::cout << "Finding (1,2) in table: " << opcodeFunctTable.count(opcodeFunctPair(1,2)) << "\n";
-    std::cout << "Value of (0,0) is: " << opcodeFunctTable[opcodeFunctPair(0,0)];
-    */
-    
     /* Part 1 - Instruction reading and parsing */
     
     //prepare text output file
@@ -241,7 +232,7 @@ int main(int argc, char * argv[])
                 instString += ",$";
                 instString += argTable[instructions[i].u.iFormat.rs];
                 instString += ",";
-                instString += std::to_string(instructions[i].u.iFormat.imm);
+                instString += std::to_string(static_cast<short>(instructions[i].u.iFormat.imm));
                 instStorage[i] += instString;
                 break;
             case 4:
@@ -266,7 +257,7 @@ int main(int argc, char * argv[])
                 instString += "$";
                 instString += argTable[instructions[i].u.iFormat.rt];
                 instString += ",";
-                instString += std::to_string(instructions[i].u.iFormat.imm);
+                instString += std::to_string(static_cast<short>(instructions[i].u.iFormat.imm));
                 instString += "($";
                 instString += argTable[instructions[i].u.iFormat.rs];
                 instString += ")";
@@ -303,6 +294,11 @@ int main(int argc, char * argv[])
     
     //initialize $gp to beginning of data area
     registerStore[28] = static_cast<int>(numInst);
+    
+    //for testing purposes only
+    registerStore[4] = 50000;
+    registerStore[5] = 100000;
+    
     
     bool exitCondition = (progCounter >= numInst);
     
@@ -419,7 +415,8 @@ int main(int argc, char * argv[])
                         outFile << "inst: " << instStorage[progCounter] << "\n";
                         rt = instructions[progCounter].u.rFormat.rt;
                         rs = instructions[progCounter].u.rFormat.rs;
-                        longAssist.u.fullLong.full = registerStore[rs] * registerStore[rt];
+                        longAssist.u.fullLong.full = static_cast<long>(registerStore[rs]) *
+                                                        static_cast<long>(registerStore[rt]);
                         registerStore[32] = longAssist.u.divLong.lower; //put low order word in lo
                         registerStore[33] = longAssist.u.divLong.upper; //put high order word in hi
                         ++progCounter;
@@ -473,7 +470,8 @@ int main(int argc, char * argv[])
                 {
                     rs = instructions[progCounter].u.iFormat.rs;
                     imm = instructions[progCounter].u.iFormat.imm;
-                    registerStore[rt] = registerStore[rs] + imm;
+                    immSigned = static_cast<short>(imm);
+                    registerStore[rt] = registerStore[rs] + immSigned;
                 }
                 ++progCounter;
                 break;
