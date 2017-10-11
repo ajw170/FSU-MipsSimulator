@@ -27,7 +27,7 @@ typedef std::pair<const unsigned int, const unsigned int> opcodeFunctPair;
 typedef std::pair<const opcodeFunctPair, const std::string> codePairFunctTable;
 
 void printRegisterState(std::vector<int> &, std::ofstream &);
-void printDataMemory(unsigned int *, size_t, std::ofstream &);
+void printDataMemory(int *, size_t, std::ofstream &);
 
 int main(int argc, char * argv[])
 {
@@ -54,8 +54,9 @@ int main(int argc, char * argv[])
     size_t numWords;
     inFile >> numWords; //read number of words
     
+    unsigned int readNum; // used to read hex values
     unsigned int progInstructions[MAXPROGRAM] = {0};
-    unsigned int dataArray[MAXPROGRAM] = {0};
+    int dataArray[MAXPROGRAM] = {0};
     
     //read in program instructions
     for (size_t i = 0; i < numInst; ++i)
@@ -66,7 +67,8 @@ int main(int argc, char * argv[])
     //read dataArray
     for (size_t i = 0; i < numWords; ++i)
     {
-        inFile >> std::hex >> dataArray[i];
+        inFile >> std::hex >> readNum;
+        dataArray[i] = static_cast<int>(readNum);
     }
     
     //Done with file, close
@@ -143,7 +145,7 @@ int main(int argc, char * argv[])
     /* Part 1 - Instruction reading and parsing */
     
     //prepare text output file
-    std::ofstream outFile("log_test.txt",std::ios::out);
+    std::ofstream outFile("log.txt",std::ios::out);
     outFile.seekp(std::ios::beg);
     
     //prepare instruction storage vector
@@ -166,7 +168,7 @@ int main(int argc, char * argv[])
             size_t validOpcodeFunct = opcodeFunctTable.count(opcodeFunctPair(0,funct));
             if (!validOpcodeFunct)
             {
-                std::cerr << "could not find inst with opcode " << opcode << " and funct " << funct;
+                std::cerr << "could not find inst with opcode " << opcode << " and funct " << funct << "\n";
                 outFile.close();
                 exit(EXIT_FAILURE);
             }
@@ -263,8 +265,8 @@ int main(int argc, char * argv[])
                 instString += ")";
                 instStorage[i] += instString;
                 break;
-            default:
-                std::cerr << "Invalid opcode / funct cominbation";
+            default: //program should never get here
+                std::cerr << "Invalid opcode / funct cominbation\n";
                 exit(EXIT_FAILURE);
                 break;
         }
@@ -402,7 +404,8 @@ int main(int argc, char * argv[])
                         rt = instructions[progCounter].u.rFormat.rt;
                         if (registerStore[rt] == 0) //prevent divide by zero
                         {
-                            std::cerr << "divide by zero for instruction at " << progCounter;
+                            std::cerr << "divide by zero for instruction at " << progCounter << "\n";
+                            outFile.close();
                             exit(EXIT_FAILURE);
                         }
                         rs = instructions[progCounter].u.rFormat.rs;
@@ -456,7 +459,7 @@ int main(int argc, char * argv[])
                         break;
                         
                     default: //the program should never reach this point
-                        std::cerr << "Something was wrong.";
+                        std::cerr << "Something was wrong.\n";
                         outFile.close();
                         exit(EXIT_FAILURE);
                         break;
@@ -489,11 +492,26 @@ int main(int argc, char * argv[])
                         //check if PC is accessing data memory
                         if ((progCounter + immSigned) <= (numInst + numWords - 1))
                         {
-                            std::cerr << "PC is accessing data memory at address " << (progCounter + immSigned);
+                            std::cerr << "PC is accessing data memory at address " << (progCounter + immSigned) << "\n";
+                            outFile << "inst: " << instStorage[progCounter] << "\n";
+                            printRegisterState(registerStore,outFile);
+                            outFile << "\n\n";
+                            printDataMemory(dataArray,numWords,outFile);
+                            outFile << "\n\n";
+                            progCounter += immSigned;
+                            outFile << "PC: " << progCounter << "\n";
+                            
                         }
                         else
                         {
-                            std::cerr << "PC is accessing illegal memory address " << (progCounter + immSigned);
+                            std::cerr << "PC is accessing illegal memory address " << (progCounter + immSigned) << "\n";
+                            outFile << "inst: " << instStorage[progCounter] << "\n";
+                            printRegisterState(registerStore,outFile);
+                            outFile << "\n\n";
+                            printDataMemory(dataArray,numWords,outFile);
+                            outFile << "\n\n";
+                            progCounter += immSigned;
+                            outFile << "PC: " << progCounter << "\n";
                         }
                         outFile.close();
                         exit(EXIT_FAILURE);
@@ -521,11 +539,25 @@ int main(int argc, char * argv[])
                         //check if PC is accessing data memory
                         if ((progCounter + immSigned) <= (numInst + numWords - 1))
                         {
-                            std::cerr << "PC is accessing data memory at address " << (progCounter + immSigned);
+                            std::cerr << "PC is accessing data memory at address " << (progCounter + immSigned) << "\n";
+                            outFile << "inst: " << instStorage[progCounter] << "\n";
+                            printRegisterState(registerStore,outFile);
+                            outFile << "\n\n";
+                            printDataMemory(dataArray,numWords,outFile);
+                            outFile << "\n\n";
+                            progCounter += immSigned;
+                            outFile << "PC: " << progCounter << "\n";
                         }
                         else
                         {
-                            std::cerr << "PC is accessing illegal memory address " << (progCounter + immSigned);
+                            std::cerr << "PC is accessing illegal memory address " << (progCounter + immSigned) << "\n";
+                            outFile << "inst: " << instStorage[progCounter] << "\n";
+                            printRegisterState(registerStore,outFile);
+                            outFile << "\n\n";
+                            printDataMemory(dataArray,numWords,outFile);
+                            outFile << "\n\n";
+                            progCounter += immSigned;
+                            outFile << "PC: " << progCounter << "\n";
                         }
                         outFile.close();
                         exit(EXIT_FAILURE);
@@ -549,11 +581,25 @@ int main(int argc, char * argv[])
                     //check if PC is accessing data memory
                     if ( address < (numInst + numWords) )
                     {
-                        std::cerr << "PC is accessing data memory at address " << addressSigned;
+                        std::cerr << "PC is accessing data memory at address " << addressSigned << "\n";
+                        outFile << "inst: " << instStorage[progCounter] << "\n";
+                        printRegisterState(registerStore,outFile);
+                        outFile << "\n\n";
+                        printDataMemory(dataArray,numWords,outFile);
+                        outFile << "\n\n";
+                        progCounter = addressSigned;
+                        outFile << "PC: " << progCounter << "\n";
                     }
                     else
                     {
-                        std::cerr << "PC is accessing illegal memory address " << addressSigned;
+                        std::cerr << "PC is accessing illegal memory address " << addressSigned << "\n";
+                        outFile << "inst: " << instStorage[progCounter] << "\n";
+                        printRegisterState(registerStore,outFile);
+                        outFile << "\n\n";
+                        printDataMemory(dataArray,numWords,outFile);
+                        outFile << "\n\n";
+                        progCounter = addressSigned;
+                        outFile << "PC: " << progCounter << "\n";
                     }
                     outFile.close();
                     exit(EXIT_FAILURE);
@@ -571,9 +617,15 @@ int main(int argc, char * argv[])
                 
                 addrLoadStore = registerStore[rs] + immSigned;
                 //first check to ensure load address is valid
+                if ((addrLoadStore < numInst) && addrLoadStore >= 0)
+                {
+                    std::cerr << "load from instruction memory at address " << addrLoadStore << "\n";
+                    outFile.close();
+                    exit(EXIT_FAILURE);
+                }
                 if ((addrLoadStore < (numInst)) || (addrLoadStore >= (numInst + numWords)))
                 {
-                    std::cerr << "Load outside of data memory at address " << addrLoadStore;
+                    std::cerr << "load outside of data memory at address " << addrLoadStore << "\n";
                     outFile.close();
                     exit(EXIT_FAILURE);
                 }
@@ -593,9 +645,15 @@ int main(int argc, char * argv[])
                 
                 addrLoadStore = registerStore[rs] + immSigned;
                 //first check to ensure load address is valid
+                if ((addrLoadStore < numInst) && addrLoadStore >= 0)
+                {
+                    std::cerr << "store to instruction memory at address " << addrLoadStore << "\n";
+                    outFile.close();
+                    exit(EXIT_FAILURE);
+                }
                 if ((addrLoadStore < (numInst)) || (addrLoadStore >= (numInst + numWords)))
                 {
-                    std::cerr << "Store outside of data memory at address " << addrLoadStore;
+                    std::cerr << "store outside of data memory at address " << addrLoadStore << "\n";
                     outFile.close();
                     exit(EXIT_FAILURE);
                 }
@@ -615,7 +673,27 @@ int main(int argc, char * argv[])
         //(2) the program counter goes past the last valid instruction
         int vzero;
         vzero = registerStore[2];
-        exitCondition = ((opcode == 0 && funct == 12 && vzero == 10) || (progCounter >= numInst));
+        exitCondition = (opcode == 0 && funct == 12 && vzero == 10); // || (progCounter >= numInst);
+        
+        //if current ProgCounter is higher than inst number
+        if ((progCounter) >= numInst && (!exitCondition))
+        {
+            if ((progCounter) < (numInst + numWords))
+            {
+                std::cerr << "PC is accessing data memory at address " << (progCounter) << "\n";
+            }
+            else
+            {
+                std::cerr << "PC is accessing illegal memory address " << (progCounter) << "\n";
+            }
+            printRegisterState(registerStore,outFile);
+            outFile << "\n\n";
+            printDataMemory(dataArray,numWords,outFile);
+            outFile << "\n\n";
+            outFile << "PC: " << (progCounter) << "\n";
+            outFile.close();
+            exit(EXIT_FAILURE); //exit program due to PC access failure
+        }
         
         if (!exitCondition)
         {
@@ -671,19 +749,24 @@ void printRegisterState(std::vector<int> & registerStore, std::ofstream & outFil
     outFile << std::setw(10) << "$hi =" << std::setw(6) << registerStore[33];
 }
 
-void printDataMemory(unsigned int * dataArray, size_t numWords, std::ofstream & outFile)
+void printDataMemory(int * dataArray, size_t numWords, std::ofstream & outFile)
 {
     outFile << std::left << "data memory:\n";
     outFile << std::right;
     
     for (size_t i = 0; i < numWords; ++i)
     {
+        if ((i != 0) && (i % 3) == 0)
+        {
+            outFile << "\n";
+        }
         outFile << std::setw(8) << "data[";
         outFile << std::setw(3) << i;
         outFile << "] =";
         outFile << std::setw(6) << dataArray[i];
-        outFile << "\n";
+        
     }
+    outFile << "\n";
 }
 
 

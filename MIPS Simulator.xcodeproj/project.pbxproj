@@ -29,6 +29,10 @@
 		985734E41F792826003A313E /* log-illInstAddr.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "log-illInstAddr.txt"; sourceTree = "<group>"; };
 		985734E51F792826003A313E /* log-illInstAddr2.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "log-illInstAddr2.txt"; sourceTree = "<group>"; };
 		985734E61F792826003A313E /* sum-exceptions.obj */ = {isa = PBXFileReference; explicitFileType = text; fileEncoding = 4; path = "sum-exceptions.obj"; sourceTree = "<group>"; };
+		9865E7471F8E9D08005C4B86 /* bigTest.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = bigTest.asm; sourceTree = "<group>"; };
+		9865E7481F8E9D08005C4B86 /* bigTest.obj */ = {isa = PBXFileReference; explicitFileType = text; fileEncoding = 4; path = bigTest.obj; sourceTree = "<group>"; };
+		9877CB441F8DDA6700DF3D68 /* newTest2.obj */ = {isa = PBXFileReference; explicitFileType = text; fileEncoding = 4; path = newTest2.obj; sourceTree = "<group>"; };
+		9877CB451F8E84CD00DF3D68 /* newTest3.obj */ = {isa = PBXFileReference; explicitFileType = text; fileEncoding = 4; path = newTest3.obj; sourceTree = "<group>"; };
 		98F6B5FC1F78119600E62775 /* MIPS Simulator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "MIPS Simulator"; sourceTree = BUILT_PRODUCTS_DIR; };
 		98F6B6061F78128400E62775 /* sim.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sim.cpp; sourceTree = "<group>"; };
 		98F6B6081F78689300E62775 /* sum.asm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.asm.asm; path = sum.asm; sourceTree = "<group>"; };
@@ -68,6 +72,8 @@
 		98F6B5FE1F78119600E62775 /* MIPS Simulator */ = {
 			isa = PBXGroup;
 			children = (
+				9865E7471F8E9D08005C4B86 /* bigTest.asm */,
+				9865E7481F8E9D08005C4B86 /* bigTest.obj */,
 				FB80398E1F7A0A5F00D8402D /* log_test.txt */,
 				985734E11F792826003A313E /* log-divzero.txt */,
 				985734E21F792826003A313E /* log-illDataAddr.txt */,
@@ -77,6 +83,8 @@
 				985734E61F792826003A313E /* sum-exceptions.obj */,
 				98F6B60C1F78964900E62775 /* log.txt */,
 				98F6B60B1F7868C400E62775 /* sum.obj */,
+				9877CB441F8DDA6700DF3D68 /* newTest2.obj */,
+				9877CB451F8E84CD00DF3D68 /* newTest3.obj */,
 				98F6B6081F78689300E62775 /* sum.asm */,
 				98F6B6061F78128400E62775 /* sim.cpp */,
 				FBFED9E71F7C60D00067CCB2 /* sum_long_andrew.obj */,
