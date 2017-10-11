@@ -296,8 +296,8 @@ int main(int argc, char * argv[])
     registerStore[28] = static_cast<int>(numInst);
     
     //for testing purposes only
-    registerStore[4] = 50000;
-    registerStore[5] = 100000;
+    //registerStore[4] = 50000;
+    //registerStore[5] = 100000;
     
     
     bool exitCondition = (progCounter >= numInst);
