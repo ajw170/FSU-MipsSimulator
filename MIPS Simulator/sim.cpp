@@ -247,7 +247,7 @@ int main(int argc, char * argv[])
                 instStorage[i] += instString;
                 break;
             case 2:
-                instString += " ";
+                instString += "\t";
                 instString += std::to_string(instructions[i].u.jFormat.address);
                 instStorage[i] += instString;
                 break;
@@ -627,7 +627,7 @@ int main(int argc, char * argv[])
 
     } //end while (!exitCondition)
     
-    outFile << "exiting simulator";
+    outFile << "exiting simulator\n";
     outFile.close();
 }
 

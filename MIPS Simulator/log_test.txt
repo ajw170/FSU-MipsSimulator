@@ -3,62 +3,23 @@ insts:
    1: addu	$s1,$zero,$zero
    2: addiu	$v0,$zero,5
    3: syscall
-   4: or	$t0,$s1,$s2
-   5: mult	$a0,$a1
-   6: slt	$ra,$t8,$t9
-   7: addiu	$t8,$k0,10
-   8: addu	$t0,$t1,$t2
-   9: and	$k0,$k1,$gp
-  10: bne	$s0,$s4,-6
-  11: lw	$v0,0($gp)
-  12: lw	$v1,5($gp)
-  13: lw	$v1,0($gp)
-  14: lw	$s5,8($gp)
-  15: lw	$a0,7($gp)
-  16: mfhi	$s0
-  17: mfhi	$zero
-  18: mfhi	$a3
-  19: mflo	$a3
-  20: mflo	$t8
-  21: mult	$t8,$t9
-  22: or	$a3,$a1,$v0
-  23: slt	$a3,$a3,$s6
-  24: subu	$a1,$t2,$s3
-  25: sw	$a0,8($gp)
-  26: sw	$a0,8($gp)
-  27: sw	$t0,9($gp)
-  28: sw	$v1,10($gp)
-  29: sw	$at,3($gp)
-  30: syscall
-  31: sw	$v0,0($gp)
-  32: lw	$s2,0($gp)
-  33: slt	$t0,$s1,$s2
-  34: bne	$t0,$zero,6
-  35: addiu	$v0,$zero,-45
-  36: syscall
-  37: addu	$s0,$s0,$v0
-  38: addiu	$s1,$s1,1
-  39: j 40
-  40: addu	$a0,$s0,$zero
-  41: addiu	$v0,$zero,1
-  42: syscall
-  43: addiu	$v0,$zero,10
-  44: syscall
+   4: sw	$v0,0($gp)
+   5: lw	$s2,0($gp)
+   6: slt	$t0,$s1,$s2
+   7: beq	$t0,$zero,6
+   8: addiu	$v0,$zero,5
+   9: syscall
+  10: addu	$s0,$s0,$v0
+  11: addiu	$s1,$s1,1
+  12: j	5
+  13: addu	$a0,$s0,$zero
+  14: addiu	$v0,$zero,1
+  15: syscall
+  16: addiu	$v0,$zero,10
+  17: syscall
 
 data:
-  45: 0
-  46: 5
-  47: 6
-  48: 7
-  49: 0
-  50: 0
-  51: 0
-  52: 5
-  53: 0
-  54: 0
-  55: 99
-  56: 0
-  57: 1
+  18: 0
 
 PC: 0
 inst: addu	$s0,$zero,$zero
@@ -71,23 +32,11 @@ regs:
      $s0 =     0     $s1 =     0     $s2 =     0     $s3 =     0
      $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
      $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
-     $gp =    45     $sp =     0     $fp =     0     $ra =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
      $lo =     0     $hi =     0
 
 data memory:
    data[  0] =     0
-   data[  1] =     5
-   data[  2] =     6
-   data[  3] =     7
-   data[  4] =     0
-   data[  5] =     0
-   data[  6] =     0
-   data[  7] =     5
-   data[  8] =     0
-   data[  9] =     0
-   data[ 10] =    99
-   data[ 11] =     0
-   data[ 12] =     1
 
 
 PC: 1
@@ -101,23 +50,11 @@ regs:
      $s0 =     0     $s1 =     0     $s2 =     0     $s3 =     0
      $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
      $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
-     $gp =    45     $sp =     0     $fp =     0     $ra =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
      $lo =     0     $hi =     0
 
 data memory:
    data[  0] =     0
-   data[  1] =     5
-   data[  2] =     6
-   data[  3] =     7
-   data[  4] =     0
-   data[  5] =     0
-   data[  6] =     0
-   data[  7] =     5
-   data[  8] =     0
-   data[  9] =     0
-   data[ 10] =    99
-   data[ 11] =     0
-   data[ 12] =     1
 
 
 PC: 2
@@ -131,1255 +68,895 @@ regs:
      $s0 =     0     $s1 =     0     $s2 =     0     $s3 =     0
      $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
      $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
-     $gp =    45     $sp =     0     $fp =     0     $ra =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
      $lo =     0     $hi =     0
 
 data memory:
    data[  0] =     0
-   data[  1] =     5
-   data[  2] =     6
-   data[  3] =     7
-   data[  4] =     0
-   data[  5] =     0
-   data[  6] =     0
-   data[  7] =     5
-   data[  8] =     0
-   data[  9] =     0
-   data[ 10] =    99
-   data[ 11] =     0
-   data[ 12] =     1
 
 
 PC: 3
 inst: syscall
 
 regs:
-   $zero =     0     $at =     0     $v0 =    66     $v1 =     0
+   $zero =     0     $at =     0     $v0 =     5     $v1 =     0
      $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
      $t0 =     0     $t1 =     0     $t2 =     0     $t3 =     0
      $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
      $s0 =     0     $s1 =     0     $s2 =     0     $s3 =     0
      $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
      $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
-     $gp =    45     $sp =     0     $fp =     0     $ra =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
      $lo =     0     $hi =     0
 
 data memory:
    data[  0] =     0
-   data[  1] =     5
-   data[  2] =     6
-   data[  3] =     7
-   data[  4] =     0
-   data[  5] =     0
-   data[  6] =     0
-   data[  7] =     5
-   data[  8] =     0
-   data[  9] =     0
-   data[ 10] =    99
-   data[ 11] =     0
-   data[ 12] =     1
 
 
 PC: 4
-inst: or	$t0,$s1,$s2
-
-regs:
-   $zero =     0     $at =     0     $v0 =    66     $v1 =     0
-     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
-     $t0 =     0     $t1 =     0     $t2 =     0     $t3 =     0
-     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
-     $s0 =     0     $s1 =     0     $s2 =     0     $s3 =     0
-     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
-     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
-     $gp =    45     $sp =     0     $fp =     0     $ra =     0
-     $lo =     0     $hi =     0
-
-data memory:
-   data[  0] =     0
-   data[  1] =     5
-   data[  2] =     6
-   data[  3] =     7
-   data[  4] =     0
-   data[  5] =     0
-   data[  6] =     0
-   data[  7] =     5
-   data[  8] =     0
-   data[  9] =     0
-   data[ 10] =    99
-   data[ 11] =     0
-   data[ 12] =     1
-
-
-PC: 5
-inst: mult	$a0,$a1
-
-regs:
-   $zero =     0     $at =     0     $v0 =    66     $v1 =     0
-     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
-     $t0 =     0     $t1 =     0     $t2 =     0     $t3 =     0
-     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
-     $s0 =     0     $s1 =     0     $s2 =     0     $s3 =     0
-     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
-     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
-     $gp =    45     $sp =     0     $fp =     0     $ra =     0
-     $lo =     0     $hi =     0
-
-data memory:
-   data[  0] =     0
-   data[  1] =     5
-   data[  2] =     6
-   data[  3] =     7
-   data[  4] =     0
-   data[  5] =     0
-   data[  6] =     0
-   data[  7] =     5
-   data[  8] =     0
-   data[  9] =     0
-   data[ 10] =    99
-   data[ 11] =     0
-   data[ 12] =     1
-
-
-PC: 6
-inst: slt	$ra,$t8,$t9
-
-regs:
-   $zero =     0     $at =     0     $v0 =    66     $v1 =     0
-     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
-     $t0 =     0     $t1 =     0     $t2 =     0     $t3 =     0
-     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
-     $s0 =     0     $s1 =     0     $s2 =     0     $s3 =     0
-     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
-     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
-     $gp =    45     $sp =     0     $fp =     0     $ra =     0
-     $lo =     0     $hi =     0
-
-data memory:
-   data[  0] =     0
-   data[  1] =     5
-   data[  2] =     6
-   data[  3] =     7
-   data[  4] =     0
-   data[  5] =     0
-   data[  6] =     0
-   data[  7] =     5
-   data[  8] =     0
-   data[  9] =     0
-   data[ 10] =    99
-   data[ 11] =     0
-   data[ 12] =     1
-
-
-PC: 7
-inst: addiu	$t8,$k0,10
-
-regs:
-   $zero =     0     $at =     0     $v0 =    66     $v1 =     0
-     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
-     $t0 =     0     $t1 =     0     $t2 =     0     $t3 =     0
-     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
-     $s0 =     0     $s1 =     0     $s2 =     0     $s3 =     0
-     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
-     $t8 =    10     $t9 =     0     $k0 =     0     $k1 =     0
-     $gp =    45     $sp =     0     $fp =     0     $ra =     0
-     $lo =     0     $hi =     0
-
-data memory:
-   data[  0] =     0
-   data[  1] =     5
-   data[  2] =     6
-   data[  3] =     7
-   data[  4] =     0
-   data[  5] =     0
-   data[  6] =     0
-   data[  7] =     5
-   data[  8] =     0
-   data[  9] =     0
-   data[ 10] =    99
-   data[ 11] =     0
-   data[ 12] =     1
-
-
-PC: 8
-inst: addu	$t0,$t1,$t2
-
-regs:
-   $zero =     0     $at =     0     $v0 =    66     $v1 =     0
-     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
-     $t0 =     0     $t1 =     0     $t2 =     0     $t3 =     0
-     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
-     $s0 =     0     $s1 =     0     $s2 =     0     $s3 =     0
-     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
-     $t8 =    10     $t9 =     0     $k0 =     0     $k1 =     0
-     $gp =    45     $sp =     0     $fp =     0     $ra =     0
-     $lo =     0     $hi =     0
-
-data memory:
-   data[  0] =     0
-   data[  1] =     5
-   data[  2] =     6
-   data[  3] =     7
-   data[  4] =     0
-   data[  5] =     0
-   data[  6] =     0
-   data[  7] =     5
-   data[  8] =     0
-   data[  9] =     0
-   data[ 10] =    99
-   data[ 11] =     0
-   data[ 12] =     1
-
-
-PC: 9
-inst: and	$k0,$k1,$gp
-
-regs:
-   $zero =     0     $at =     0     $v0 =    66     $v1 =     0
-     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
-     $t0 =     0     $t1 =     0     $t2 =     0     $t3 =     0
-     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
-     $s0 =     0     $s1 =     0     $s2 =     0     $s3 =     0
-     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
-     $t8 =    10     $t9 =     0     $k0 =     0     $k1 =     0
-     $gp =    45     $sp =     0     $fp =     0     $ra =     0
-     $lo =     0     $hi =     0
-
-data memory:
-   data[  0] =     0
-   data[  1] =     5
-   data[  2] =     6
-   data[  3] =     7
-   data[  4] =     0
-   data[  5] =     0
-   data[  6] =     0
-   data[  7] =     5
-   data[  8] =     0
-   data[  9] =     0
-   data[ 10] =    99
-   data[ 11] =     0
-   data[ 12] =     1
-
-
-PC: 10
-inst: bne	$s0,$s4,-6
-
-regs:
-   $zero =     0     $at =     0     $v0 =    66     $v1 =     0
-     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
-     $t0 =     0     $t1 =     0     $t2 =     0     $t3 =     0
-     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
-     $s0 =     0     $s1 =     0     $s2 =     0     $s3 =     0
-     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
-     $t8 =    10     $t9 =     0     $k0 =     0     $k1 =     0
-     $gp =    45     $sp =     0     $fp =     0     $ra =     0
-     $lo =     0     $hi =     0
-
-data memory:
-   data[  0] =     0
-   data[  1] =     5
-   data[  2] =     6
-   data[  3] =     7
-   data[  4] =     0
-   data[  5] =     0
-   data[  6] =     0
-   data[  7] =     5
-   data[  8] =     0
-   data[  9] =     0
-   data[ 10] =    99
-   data[ 11] =     0
-   data[ 12] =     1
-
-
-PC: 11
-inst: lw	$v0,0($gp)
-
-regs:
-   $zero =     0     $at =     0     $v0 =     0     $v1 =     0
-     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
-     $t0 =     0     $t1 =     0     $t2 =     0     $t3 =     0
-     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
-     $s0 =     0     $s1 =     0     $s2 =     0     $s3 =     0
-     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
-     $t8 =    10     $t9 =     0     $k0 =     0     $k1 =     0
-     $gp =    45     $sp =     0     $fp =     0     $ra =     0
-     $lo =     0     $hi =     0
-
-data memory:
-   data[  0] =     0
-   data[  1] =     5
-   data[  2] =     6
-   data[  3] =     7
-   data[  4] =     0
-   data[  5] =     0
-   data[  6] =     0
-   data[  7] =     5
-   data[  8] =     0
-   data[  9] =     0
-   data[ 10] =    99
-   data[ 11] =     0
-   data[ 12] =     1
-
-
-PC: 12
-inst: lw	$v1,5($gp)
-
-regs:
-   $zero =     0     $at =     0     $v0 =     0     $v1 =     0
-     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
-     $t0 =     0     $t1 =     0     $t2 =     0     $t3 =     0
-     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
-     $s0 =     0     $s1 =     0     $s2 =     0     $s3 =     0
-     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
-     $t8 =    10     $t9 =     0     $k0 =     0     $k1 =     0
-     $gp =    45     $sp =     0     $fp =     0     $ra =     0
-     $lo =     0     $hi =     0
-
-data memory:
-   data[  0] =     0
-   data[  1] =     5
-   data[  2] =     6
-   data[  3] =     7
-   data[  4] =     0
-   data[  5] =     0
-   data[  6] =     0
-   data[  7] =     5
-   data[  8] =     0
-   data[  9] =     0
-   data[ 10] =    99
-   data[ 11] =     0
-   data[ 12] =     1
-
-
-PC: 13
-inst: lw	$v1,0($gp)
-
-regs:
-   $zero =     0     $at =     0     $v0 =     0     $v1 =     0
-     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
-     $t0 =     0     $t1 =     0     $t2 =     0     $t3 =     0
-     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
-     $s0 =     0     $s1 =     0     $s2 =     0     $s3 =     0
-     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
-     $t8 =    10     $t9 =     0     $k0 =     0     $k1 =     0
-     $gp =    45     $sp =     0     $fp =     0     $ra =     0
-     $lo =     0     $hi =     0
-
-data memory:
-   data[  0] =     0
-   data[  1] =     5
-   data[  2] =     6
-   data[  3] =     7
-   data[  4] =     0
-   data[  5] =     0
-   data[  6] =     0
-   data[  7] =     5
-   data[  8] =     0
-   data[  9] =     0
-   data[ 10] =    99
-   data[ 11] =     0
-   data[ 12] =     1
-
-
-PC: 14
-inst: lw	$s5,8($gp)
-
-regs:
-   $zero =     0     $at =     0     $v0 =     0     $v1 =     0
-     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
-     $t0 =     0     $t1 =     0     $t2 =     0     $t3 =     0
-     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
-     $s0 =     0     $s1 =     0     $s2 =     0     $s3 =     0
-     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
-     $t8 =    10     $t9 =     0     $k0 =     0     $k1 =     0
-     $gp =    45     $sp =     0     $fp =     0     $ra =     0
-     $lo =     0     $hi =     0
-
-data memory:
-   data[  0] =     0
-   data[  1] =     5
-   data[  2] =     6
-   data[  3] =     7
-   data[  4] =     0
-   data[  5] =     0
-   data[  6] =     0
-   data[  7] =     5
-   data[  8] =     0
-   data[  9] =     0
-   data[ 10] =    99
-   data[ 11] =     0
-   data[ 12] =     1
-
-
-PC: 15
-inst: lw	$a0,7($gp)
-
-regs:
-   $zero =     0     $at =     0     $v0 =     0     $v1 =     0
-     $a0 =     5     $a1 =     0     $a2 =     0     $a3 =     0
-     $t0 =     0     $t1 =     0     $t2 =     0     $t3 =     0
-     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
-     $s0 =     0     $s1 =     0     $s2 =     0     $s3 =     0
-     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
-     $t8 =    10     $t9 =     0     $k0 =     0     $k1 =     0
-     $gp =    45     $sp =     0     $fp =     0     $ra =     0
-     $lo =     0     $hi =     0
-
-data memory:
-   data[  0] =     0
-   data[  1] =     5
-   data[  2] =     6
-   data[  3] =     7
-   data[  4] =     0
-   data[  5] =     0
-   data[  6] =     0
-   data[  7] =     5
-   data[  8] =     0
-   data[  9] =     0
-   data[ 10] =    99
-   data[ 11] =     0
-   data[ 12] =     1
-
-
-PC: 16
-inst: mfhi	$s0
-
-regs:
-   $zero =     0     $at =     0     $v0 =     0     $v1 =     0
-     $a0 =     5     $a1 =     0     $a2 =     0     $a3 =     0
-     $t0 =     0     $t1 =     0     $t2 =     0     $t3 =     0
-     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
-     $s0 =     0     $s1 =     0     $s2 =     0     $s3 =     0
-     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
-     $t8 =    10     $t9 =     0     $k0 =     0     $k1 =     0
-     $gp =    45     $sp =     0     $fp =     0     $ra =     0
-     $lo =     0     $hi =     0
-
-data memory:
-   data[  0] =     0
-   data[  1] =     5
-   data[  2] =     6
-   data[  3] =     7
-   data[  4] =     0
-   data[  5] =     0
-   data[  6] =     0
-   data[  7] =     5
-   data[  8] =     0
-   data[  9] =     0
-   data[ 10] =    99
-   data[ 11] =     0
-   data[ 12] =     1
-
-
-PC: 17
-inst: mfhi	$zero
-
-regs:
-   $zero =     0     $at =     0     $v0 =     0     $v1 =     0
-     $a0 =     5     $a1 =     0     $a2 =     0     $a3 =     0
-     $t0 =     0     $t1 =     0     $t2 =     0     $t3 =     0
-     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
-     $s0 =     0     $s1 =     0     $s2 =     0     $s3 =     0
-     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
-     $t8 =    10     $t9 =     0     $k0 =     0     $k1 =     0
-     $gp =    45     $sp =     0     $fp =     0     $ra =     0
-     $lo =     0     $hi =     0
-
-data memory:
-   data[  0] =     0
-   data[  1] =     5
-   data[  2] =     6
-   data[  3] =     7
-   data[  4] =     0
-   data[  5] =     0
-   data[  6] =     0
-   data[  7] =     5
-   data[  8] =     0
-   data[  9] =     0
-   data[ 10] =    99
-   data[ 11] =     0
-   data[ 12] =     1
-
-
-PC: 18
-inst: mfhi	$a3
-
-regs:
-   $zero =     0     $at =     0     $v0 =     0     $v1 =     0
-     $a0 =     5     $a1 =     0     $a2 =     0     $a3 =     0
-     $t0 =     0     $t1 =     0     $t2 =     0     $t3 =     0
-     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
-     $s0 =     0     $s1 =     0     $s2 =     0     $s3 =     0
-     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
-     $t8 =    10     $t9 =     0     $k0 =     0     $k1 =     0
-     $gp =    45     $sp =     0     $fp =     0     $ra =     0
-     $lo =     0     $hi =     0
-
-data memory:
-   data[  0] =     0
-   data[  1] =     5
-   data[  2] =     6
-   data[  3] =     7
-   data[  4] =     0
-   data[  5] =     0
-   data[  6] =     0
-   data[  7] =     5
-   data[  8] =     0
-   data[  9] =     0
-   data[ 10] =    99
-   data[ 11] =     0
-   data[ 12] =     1
-
-
-PC: 19
-inst: mflo	$a3
-
-regs:
-   $zero =     0     $at =     0     $v0 =     0     $v1 =     0
-     $a0 =     5     $a1 =     0     $a2 =     0     $a3 =     0
-     $t0 =     0     $t1 =     0     $t2 =     0     $t3 =     0
-     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
-     $s0 =     0     $s1 =     0     $s2 =     0     $s3 =     0
-     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
-     $t8 =    10     $t9 =     0     $k0 =     0     $k1 =     0
-     $gp =    45     $sp =     0     $fp =     0     $ra =     0
-     $lo =     0     $hi =     0
-
-data memory:
-   data[  0] =     0
-   data[  1] =     5
-   data[  2] =     6
-   data[  3] =     7
-   data[  4] =     0
-   data[  5] =     0
-   data[  6] =     0
-   data[  7] =     5
-   data[  8] =     0
-   data[  9] =     0
-   data[ 10] =    99
-   data[ 11] =     0
-   data[ 12] =     1
-
-
-PC: 20
-inst: mflo	$t8
-
-regs:
-   $zero =     0     $at =     0     $v0 =     0     $v1 =     0
-     $a0 =     5     $a1 =     0     $a2 =     0     $a3 =     0
-     $t0 =     0     $t1 =     0     $t2 =     0     $t3 =     0
-     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
-     $s0 =     0     $s1 =     0     $s2 =     0     $s3 =     0
-     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
-     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
-     $gp =    45     $sp =     0     $fp =     0     $ra =     0
-     $lo =     0     $hi =     0
-
-data memory:
-   data[  0] =     0
-   data[  1] =     5
-   data[  2] =     6
-   data[  3] =     7
-   data[  4] =     0
-   data[  5] =     0
-   data[  6] =     0
-   data[  7] =     5
-   data[  8] =     0
-   data[  9] =     0
-   data[ 10] =    99
-   data[ 11] =     0
-   data[ 12] =     1
-
-
-PC: 21
-inst: mult	$t8,$t9
-
-regs:
-   $zero =     0     $at =     0     $v0 =     0     $v1 =     0
-     $a0 =     5     $a1 =     0     $a2 =     0     $a3 =     0
-     $t0 =     0     $t1 =     0     $t2 =     0     $t3 =     0
-     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
-     $s0 =     0     $s1 =     0     $s2 =     0     $s3 =     0
-     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
-     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
-     $gp =    45     $sp =     0     $fp =     0     $ra =     0
-     $lo =     0     $hi =     0
-
-data memory:
-   data[  0] =     0
-   data[  1] =     5
-   data[  2] =     6
-   data[  3] =     7
-   data[  4] =     0
-   data[  5] =     0
-   data[  6] =     0
-   data[  7] =     5
-   data[  8] =     0
-   data[  9] =     0
-   data[ 10] =    99
-   data[ 11] =     0
-   data[ 12] =     1
-
-
-PC: 22
-inst: or	$a3,$a1,$v0
-
-regs:
-   $zero =     0     $at =     0     $v0 =     0     $v1 =     0
-     $a0 =     5     $a1 =     0     $a2 =     0     $a3 =     0
-     $t0 =     0     $t1 =     0     $t2 =     0     $t3 =     0
-     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
-     $s0 =     0     $s1 =     0     $s2 =     0     $s3 =     0
-     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
-     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
-     $gp =    45     $sp =     0     $fp =     0     $ra =     0
-     $lo =     0     $hi =     0
-
-data memory:
-   data[  0] =     0
-   data[  1] =     5
-   data[  2] =     6
-   data[  3] =     7
-   data[  4] =     0
-   data[  5] =     0
-   data[  6] =     0
-   data[  7] =     5
-   data[  8] =     0
-   data[  9] =     0
-   data[ 10] =    99
-   data[ 11] =     0
-   data[ 12] =     1
-
-
-PC: 23
-inst: slt	$a3,$a3,$s6
-
-regs:
-   $zero =     0     $at =     0     $v0 =     0     $v1 =     0
-     $a0 =     5     $a1 =     0     $a2 =     0     $a3 =     0
-     $t0 =     0     $t1 =     0     $t2 =     0     $t3 =     0
-     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
-     $s0 =     0     $s1 =     0     $s2 =     0     $s3 =     0
-     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
-     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
-     $gp =    45     $sp =     0     $fp =     0     $ra =     0
-     $lo =     0     $hi =     0
-
-data memory:
-   data[  0] =     0
-   data[  1] =     5
-   data[  2] =     6
-   data[  3] =     7
-   data[  4] =     0
-   data[  5] =     0
-   data[  6] =     0
-   data[  7] =     5
-   data[  8] =     0
-   data[  9] =     0
-   data[ 10] =    99
-   data[ 11] =     0
-   data[ 12] =     1
-
-
-PC: 24
-inst: subu	$a1,$t2,$s3
-
-regs:
-   $zero =     0     $at =     0     $v0 =     0     $v1 =     0
-     $a0 =     5     $a1 =     0     $a2 =     0     $a3 =     0
-     $t0 =     0     $t1 =     0     $t2 =     0     $t3 =     0
-     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
-     $s0 =     0     $s1 =     0     $s2 =     0     $s3 =     0
-     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
-     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
-     $gp =    45     $sp =     0     $fp =     0     $ra =     0
-     $lo =     0     $hi =     0
-
-data memory:
-   data[  0] =     0
-   data[  1] =     5
-   data[  2] =     6
-   data[  3] =     7
-   data[  4] =     0
-   data[  5] =     0
-   data[  6] =     0
-   data[  7] =     5
-   data[  8] =     0
-   data[  9] =     0
-   data[ 10] =    99
-   data[ 11] =     0
-   data[ 12] =     1
-
-
-PC: 25
-inst: sw	$a0,8($gp)
-
-regs:
-   $zero =     0     $at =     0     $v0 =     0     $v1 =     0
-     $a0 =     5     $a1 =     0     $a2 =     0     $a3 =     0
-     $t0 =     0     $t1 =     0     $t2 =     0     $t3 =     0
-     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
-     $s0 =     0     $s1 =     0     $s2 =     0     $s3 =     0
-     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
-     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
-     $gp =    45     $sp =     0     $fp =     0     $ra =     0
-     $lo =     0     $hi =     0
-
-data memory:
-   data[  0] =     0
-   data[  1] =     5
-   data[  2] =     6
-   data[  3] =     7
-   data[  4] =     0
-   data[  5] =     0
-   data[  6] =     0
-   data[  7] =     5
-   data[  8] =     5
-   data[  9] =     0
-   data[ 10] =    99
-   data[ 11] =     0
-   data[ 12] =     1
-
-
-PC: 26
-inst: sw	$a0,8($gp)
-
-regs:
-   $zero =     0     $at =     0     $v0 =     0     $v1 =     0
-     $a0 =     5     $a1 =     0     $a2 =     0     $a3 =     0
-     $t0 =     0     $t1 =     0     $t2 =     0     $t3 =     0
-     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
-     $s0 =     0     $s1 =     0     $s2 =     0     $s3 =     0
-     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
-     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
-     $gp =    45     $sp =     0     $fp =     0     $ra =     0
-     $lo =     0     $hi =     0
-
-data memory:
-   data[  0] =     0
-   data[  1] =     5
-   data[  2] =     6
-   data[  3] =     7
-   data[  4] =     0
-   data[  5] =     0
-   data[  6] =     0
-   data[  7] =     5
-   data[  8] =     5
-   data[  9] =     0
-   data[ 10] =    99
-   data[ 11] =     0
-   data[ 12] =     1
-
-
-PC: 27
-inst: sw	$t0,9($gp)
-
-regs:
-   $zero =     0     $at =     0     $v0 =     0     $v1 =     0
-     $a0 =     5     $a1 =     0     $a2 =     0     $a3 =     0
-     $t0 =     0     $t1 =     0     $t2 =     0     $t3 =     0
-     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
-     $s0 =     0     $s1 =     0     $s2 =     0     $s3 =     0
-     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
-     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
-     $gp =    45     $sp =     0     $fp =     0     $ra =     0
-     $lo =     0     $hi =     0
-
-data memory:
-   data[  0] =     0
-   data[  1] =     5
-   data[  2] =     6
-   data[  3] =     7
-   data[  4] =     0
-   data[  5] =     0
-   data[  6] =     0
-   data[  7] =     5
-   data[  8] =     5
-   data[  9] =     0
-   data[ 10] =    99
-   data[ 11] =     0
-   data[ 12] =     1
-
-
-PC: 28
-inst: sw	$v1,10($gp)
-
-regs:
-   $zero =     0     $at =     0     $v0 =     0     $v1 =     0
-     $a0 =     5     $a1 =     0     $a2 =     0     $a3 =     0
-     $t0 =     0     $t1 =     0     $t2 =     0     $t3 =     0
-     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
-     $s0 =     0     $s1 =     0     $s2 =     0     $s3 =     0
-     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
-     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
-     $gp =    45     $sp =     0     $fp =     0     $ra =     0
-     $lo =     0     $hi =     0
-
-data memory:
-   data[  0] =     0
-   data[  1] =     5
-   data[  2] =     6
-   data[  3] =     7
-   data[  4] =     0
-   data[  5] =     0
-   data[  6] =     0
-   data[  7] =     5
-   data[  8] =     5
-   data[  9] =     0
-   data[ 10] =     0
-   data[ 11] =     0
-   data[ 12] =     1
-
-
-PC: 29
-inst: sw	$at,3($gp)
-
-regs:
-   $zero =     0     $at =     0     $v0 =     0     $v1 =     0
-     $a0 =     5     $a1 =     0     $a2 =     0     $a3 =     0
-     $t0 =     0     $t1 =     0     $t2 =     0     $t3 =     0
-     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
-     $s0 =     0     $s1 =     0     $s2 =     0     $s3 =     0
-     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
-     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
-     $gp =    45     $sp =     0     $fp =     0     $ra =     0
-     $lo =     0     $hi =     0
-
-data memory:
-   data[  0] =     0
-   data[  1] =     5
-   data[  2] =     6
-   data[  3] =     0
-   data[  4] =     0
-   data[  5] =     0
-   data[  6] =     0
-   data[  7] =     5
-   data[  8] =     5
-   data[  9] =     0
-   data[ 10] =     0
-   data[ 11] =     0
-   data[ 12] =     1
-
-
-PC: 30
-inst: syscall
-
-regs:
-   $zero =     0     $at =     0     $v0 =     0     $v1 =     0
-     $a0 =     5     $a1 =     0     $a2 =     0     $a3 =     0
-     $t0 =     0     $t1 =     0     $t2 =     0     $t3 =     0
-     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
-     $s0 =     0     $s1 =     0     $s2 =     0     $s3 =     0
-     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
-     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
-     $gp =    45     $sp =     0     $fp =     0     $ra =     0
-     $lo =     0     $hi =     0
-
-data memory:
-   data[  0] =     0
-   data[  1] =     5
-   data[  2] =     6
-   data[  3] =     0
-   data[  4] =     0
-   data[  5] =     0
-   data[  6] =     0
-   data[  7] =     5
-   data[  8] =     5
-   data[  9] =     0
-   data[ 10] =     0
-   data[ 11] =     0
-   data[ 12] =     1
-
-
-PC: 31
 inst: sw	$v0,0($gp)
 
 regs:
-   $zero =     0     $at =     0     $v0 =     0     $v1 =     0
-     $a0 =     5     $a1 =     0     $a2 =     0     $a3 =     0
+   $zero =     0     $at =     0     $v0 =     5     $v1 =     0
+     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
      $t0 =     0     $t1 =     0     $t2 =     0     $t3 =     0
      $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
      $s0 =     0     $s1 =     0     $s2 =     0     $s3 =     0
      $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
      $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
-     $gp =    45     $sp =     0     $fp =     0     $ra =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
      $lo =     0     $hi =     0
 
 data memory:
-   data[  0] =     0
-   data[  1] =     5
-   data[  2] =     6
-   data[  3] =     0
-   data[  4] =     0
-   data[  5] =     0
-   data[  6] =     0
-   data[  7] =     5
-   data[  8] =     5
-   data[  9] =     0
-   data[ 10] =     0
-   data[ 11] =     0
-   data[ 12] =     1
+   data[  0] =     5
 
 
-PC: 32
+PC: 5
 inst: lw	$s2,0($gp)
 
 regs:
-   $zero =     0     $at =     0     $v0 =     0     $v1 =     0
-     $a0 =     5     $a1 =     0     $a2 =     0     $a3 =     0
+   $zero =     0     $at =     0     $v0 =     5     $v1 =     0
+     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
      $t0 =     0     $t1 =     0     $t2 =     0     $t3 =     0
      $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
-     $s0 =     0     $s1 =     0     $s2 =     0     $s3 =     0
+     $s0 =     0     $s1 =     0     $s2 =     5     $s3 =     0
      $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
      $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
-     $gp =    45     $sp =     0     $fp =     0     $ra =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
      $lo =     0     $hi =     0
 
 data memory:
-   data[  0] =     0
-   data[  1] =     5
-   data[  2] =     6
-   data[  3] =     0
-   data[  4] =     0
-   data[  5] =     0
-   data[  6] =     0
-   data[  7] =     5
-   data[  8] =     5
-   data[  9] =     0
-   data[ 10] =     0
-   data[ 11] =     0
-   data[ 12] =     1
+   data[  0] =     5
 
 
-PC: 33
+PC: 6
 inst: slt	$t0,$s1,$s2
 
 regs:
-   $zero =     0     $at =     0     $v0 =     0     $v1 =     0
-     $a0 =     5     $a1 =     0     $a2 =     0     $a3 =     0
-     $t0 =     0     $t1 =     0     $t2 =     0     $t3 =     0
+   $zero =     0     $at =     0     $v0 =     5     $v1 =     0
+     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
+     $t0 =     1     $t1 =     0     $t2 =     0     $t3 =     0
      $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
-     $s0 =     0     $s1 =     0     $s2 =     0     $s3 =     0
+     $s0 =     0     $s1 =     0     $s2 =     5     $s3 =     0
      $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
      $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
-     $gp =    45     $sp =     0     $fp =     0     $ra =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
      $lo =     0     $hi =     0
 
 data memory:
-   data[  0] =     0
-   data[  1] =     5
-   data[  2] =     6
-   data[  3] =     0
-   data[  4] =     0
-   data[  5] =     0
-   data[  6] =     0
-   data[  7] =     5
-   data[  8] =     5
-   data[  9] =     0
-   data[ 10] =     0
-   data[ 11] =     0
-   data[ 12] =     1
+   data[  0] =     5
 
 
-PC: 34
-inst: bne	$t0,$zero,6
+PC: 7
+inst: beq	$t0,$zero,6
 
 regs:
-   $zero =     0     $at =     0     $v0 =     0     $v1 =     0
-     $a0 =     5     $a1 =     0     $a2 =     0     $a3 =     0
-     $t0 =     0     $t1 =     0     $t2 =     0     $t3 =     0
+   $zero =     0     $at =     0     $v0 =     5     $v1 =     0
+     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
+     $t0 =     1     $t1 =     0     $t2 =     0     $t3 =     0
      $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
-     $s0 =     0     $s1 =     0     $s2 =     0     $s3 =     0
+     $s0 =     0     $s1 =     0     $s2 =     5     $s3 =     0
      $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
      $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
-     $gp =    45     $sp =     0     $fp =     0     $ra =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
      $lo =     0     $hi =     0
 
 data memory:
-   data[  0] =     0
-   data[  1] =     5
-   data[  2] =     6
-   data[  3] =     0
-   data[  4] =     0
-   data[  5] =     0
-   data[  6] =     0
-   data[  7] =     5
-   data[  8] =     5
-   data[  9] =     0
-   data[ 10] =     0
-   data[ 11] =     0
-   data[ 12] =     1
+   data[  0] =     5
 
 
-PC: 35
-inst: addiu	$v0,$zero,-45
+PC: 8
+inst: addiu	$v0,$zero,5
 
 regs:
-   $zero =     0     $at =     0     $v0 =   -45     $v1 =     0
-     $a0 =     5     $a1 =     0     $a2 =     0     $a3 =     0
-     $t0 =     0     $t1 =     0     $t2 =     0     $t3 =     0
+   $zero =     0     $at =     0     $v0 =     5     $v1 =     0
+     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
+     $t0 =     1     $t1 =     0     $t2 =     0     $t3 =     0
      $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
-     $s0 =     0     $s1 =     0     $s2 =     0     $s3 =     0
+     $s0 =     0     $s1 =     0     $s2 =     5     $s3 =     0
      $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
      $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
-     $gp =    45     $sp =     0     $fp =     0     $ra =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
      $lo =     0     $hi =     0
 
 data memory:
-   data[  0] =     0
-   data[  1] =     5
-   data[  2] =     6
-   data[  3] =     0
-   data[  4] =     0
-   data[  5] =     0
-   data[  6] =     0
-   data[  7] =     5
-   data[  8] =     5
-   data[  9] =     0
-   data[ 10] =     0
-   data[ 11] =     0
-   data[ 12] =     1
+   data[  0] =     5
 
 
-PC: 36
+PC: 9
 inst: syscall
 
 regs:
-   $zero =     0     $at =     0     $v0 =   -45     $v1 =     0
-     $a0 =     5     $a1 =     0     $a2 =     0     $a3 =     0
-     $t0 =     0     $t1 =     0     $t2 =     0     $t3 =     0
+   $zero =     0     $at =     0     $v0 =     5     $v1 =     0
+     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
+     $t0 =     1     $t1 =     0     $t2 =     0     $t3 =     0
      $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
-     $s0 =     0     $s1 =     0     $s2 =     0     $s3 =     0
+     $s0 =     0     $s1 =     0     $s2 =     5     $s3 =     0
      $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
      $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
-     $gp =    45     $sp =     0     $fp =     0     $ra =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
      $lo =     0     $hi =     0
 
 data memory:
-   data[  0] =     0
-   data[  1] =     5
-   data[  2] =     6
-   data[  3] =     0
-   data[  4] =     0
-   data[  5] =     0
-   data[  6] =     0
-   data[  7] =     5
-   data[  8] =     5
-   data[  9] =     0
-   data[ 10] =     0
-   data[ 11] =     0
-   data[ 12] =     1
+   data[  0] =     5
 
 
-PC: 37
+PC: 10
 inst: addu	$s0,$s0,$v0
 
 regs:
-   $zero =     0     $at =     0     $v0 =   -45     $v1 =     0
-     $a0 =     5     $a1 =     0     $a2 =     0     $a3 =     0
-     $t0 =     0     $t1 =     0     $t2 =     0     $t3 =     0
+   $zero =     0     $at =     0     $v0 =     5     $v1 =     0
+     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
+     $t0 =     1     $t1 =     0     $t2 =     0     $t3 =     0
      $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
-     $s0 =   -45     $s1 =     0     $s2 =     0     $s3 =     0
+     $s0 =     5     $s1 =     0     $s2 =     5     $s3 =     0
      $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
      $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
-     $gp =    45     $sp =     0     $fp =     0     $ra =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
      $lo =     0     $hi =     0
 
 data memory:
-   data[  0] =     0
-   data[  1] =     5
-   data[  2] =     6
-   data[  3] =     0
-   data[  4] =     0
-   data[  5] =     0
-   data[  6] =     0
-   data[  7] =     5
-   data[  8] =     5
-   data[  9] =     0
-   data[ 10] =     0
-   data[ 11] =     0
-   data[ 12] =     1
+   data[  0] =     5
 
 
-PC: 38
+PC: 11
 inst: addiu	$s1,$s1,1
 
 regs:
-   $zero =     0     $at =     0     $v0 =   -45     $v1 =     0
-     $a0 =     5     $a1 =     0     $a2 =     0     $a3 =     0
-     $t0 =     0     $t1 =     0     $t2 =     0     $t3 =     0
+   $zero =     0     $at =     0     $v0 =     5     $v1 =     0
+     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
+     $t0 =     1     $t1 =     0     $t2 =     0     $t3 =     0
      $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
-     $s0 =   -45     $s1 =     1     $s2 =     0     $s3 =     0
+     $s0 =     5     $s1 =     1     $s2 =     5     $s3 =     0
      $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
      $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
-     $gp =    45     $sp =     0     $fp =     0     $ra =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
      $lo =     0     $hi =     0
 
 data memory:
-   data[  0] =     0
-   data[  1] =     5
-   data[  2] =     6
-   data[  3] =     0
-   data[  4] =     0
-   data[  5] =     0
-   data[  6] =     0
-   data[  7] =     5
-   data[  8] =     5
-   data[  9] =     0
-   data[ 10] =     0
-   data[ 11] =     0
-   data[ 12] =     1
+   data[  0] =     5
 
 
-PC: 39
-inst: j 40
+PC: 12
+inst: j	5
 
 regs:
-   $zero =     0     $at =     0     $v0 =   -45     $v1 =     0
-     $a0 =     5     $a1 =     0     $a2 =     0     $a3 =     0
-     $t0 =     0     $t1 =     0     $t2 =     0     $t3 =     0
+   $zero =     0     $at =     0     $v0 =     5     $v1 =     0
+     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
+     $t0 =     1     $t1 =     0     $t2 =     0     $t3 =     0
      $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
-     $s0 =   -45     $s1 =     1     $s2 =     0     $s3 =     0
+     $s0 =     5     $s1 =     1     $s2 =     5     $s3 =     0
      $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
      $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
-     $gp =    45     $sp =     0     $fp =     0     $ra =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
      $lo =     0     $hi =     0
 
 data memory:
-   data[  0] =     0
-   data[  1] =     5
-   data[  2] =     6
-   data[  3] =     0
-   data[  4] =     0
-   data[  5] =     0
-   data[  6] =     0
-   data[  7] =     5
-   data[  8] =     5
-   data[  9] =     0
-   data[ 10] =     0
-   data[ 11] =     0
-   data[ 12] =     1
+   data[  0] =     5
 
 
-PC: 40
+PC: 5
+inst: lw	$s2,0($gp)
+
+regs:
+   $zero =     0     $at =     0     $v0 =     5     $v1 =     0
+     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
+     $t0 =     1     $t1 =     0     $t2 =     0     $t3 =     0
+     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
+     $s0 =     5     $s1 =     1     $s2 =     5     $s3 =     0
+     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
+     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
+     $lo =     0     $hi =     0
+
+data memory:
+   data[  0] =     5
+
+
+PC: 6
+inst: slt	$t0,$s1,$s2
+
+regs:
+   $zero =     0     $at =     0     $v0 =     5     $v1 =     0
+     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
+     $t0 =     1     $t1 =     0     $t2 =     0     $t3 =     0
+     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
+     $s0 =     5     $s1 =     1     $s2 =     5     $s3 =     0
+     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
+     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
+     $lo =     0     $hi =     0
+
+data memory:
+   data[  0] =     5
+
+
+PC: 7
+inst: beq	$t0,$zero,6
+
+regs:
+   $zero =     0     $at =     0     $v0 =     5     $v1 =     0
+     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
+     $t0 =     1     $t1 =     0     $t2 =     0     $t3 =     0
+     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
+     $s0 =     5     $s1 =     1     $s2 =     5     $s3 =     0
+     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
+     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
+     $lo =     0     $hi =     0
+
+data memory:
+   data[  0] =     5
+
+
+PC: 8
+inst: addiu	$v0,$zero,5
+
+regs:
+   $zero =     0     $at =     0     $v0 =     5     $v1 =     0
+     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
+     $t0 =     1     $t1 =     0     $t2 =     0     $t3 =     0
+     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
+     $s0 =     5     $s1 =     1     $s2 =     5     $s3 =     0
+     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
+     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
+     $lo =     0     $hi =     0
+
+data memory:
+   data[  0] =     5
+
+
+PC: 9
+inst: syscall
+
+regs:
+   $zero =     0     $at =     0     $v0 =     5     $v1 =     0
+     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
+     $t0 =     1     $t1 =     0     $t2 =     0     $t3 =     0
+     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
+     $s0 =     5     $s1 =     1     $s2 =     5     $s3 =     0
+     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
+     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
+     $lo =     0     $hi =     0
+
+data memory:
+   data[  0] =     5
+
+
+PC: 10
+inst: addu	$s0,$s0,$v0
+
+regs:
+   $zero =     0     $at =     0     $v0 =     5     $v1 =     0
+     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
+     $t0 =     1     $t1 =     0     $t2 =     0     $t3 =     0
+     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
+     $s0 =    10     $s1 =     1     $s2 =     5     $s3 =     0
+     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
+     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
+     $lo =     0     $hi =     0
+
+data memory:
+   data[  0] =     5
+
+
+PC: 11
+inst: addiu	$s1,$s1,1
+
+regs:
+   $zero =     0     $at =     0     $v0 =     5     $v1 =     0
+     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
+     $t0 =     1     $t1 =     0     $t2 =     0     $t3 =     0
+     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
+     $s0 =    10     $s1 =     2     $s2 =     5     $s3 =     0
+     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
+     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
+     $lo =     0     $hi =     0
+
+data memory:
+   data[  0] =     5
+
+
+PC: 12
+inst: j	5
+
+regs:
+   $zero =     0     $at =     0     $v0 =     5     $v1 =     0
+     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
+     $t0 =     1     $t1 =     0     $t2 =     0     $t3 =     0
+     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
+     $s0 =    10     $s1 =     2     $s2 =     5     $s3 =     0
+     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
+     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
+     $lo =     0     $hi =     0
+
+data memory:
+   data[  0] =     5
+
+
+PC: 5
+inst: lw	$s2,0($gp)
+
+regs:
+   $zero =     0     $at =     0     $v0 =     5     $v1 =     0
+     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
+     $t0 =     1     $t1 =     0     $t2 =     0     $t3 =     0
+     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
+     $s0 =    10     $s1 =     2     $s2 =     5     $s3 =     0
+     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
+     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
+     $lo =     0     $hi =     0
+
+data memory:
+   data[  0] =     5
+
+
+PC: 6
+inst: slt	$t0,$s1,$s2
+
+regs:
+   $zero =     0     $at =     0     $v0 =     5     $v1 =     0
+     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
+     $t0 =     1     $t1 =     0     $t2 =     0     $t3 =     0
+     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
+     $s0 =    10     $s1 =     2     $s2 =     5     $s3 =     0
+     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
+     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
+     $lo =     0     $hi =     0
+
+data memory:
+   data[  0] =     5
+
+
+PC: 7
+inst: beq	$t0,$zero,6
+
+regs:
+   $zero =     0     $at =     0     $v0 =     5     $v1 =     0
+     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
+     $t0 =     1     $t1 =     0     $t2 =     0     $t3 =     0
+     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
+     $s0 =    10     $s1 =     2     $s2 =     5     $s3 =     0
+     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
+     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
+     $lo =     0     $hi =     0
+
+data memory:
+   data[  0] =     5
+
+
+PC: 8
+inst: addiu	$v0,$zero,5
+
+regs:
+   $zero =     0     $at =     0     $v0 =     5     $v1 =     0
+     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
+     $t0 =     1     $t1 =     0     $t2 =     0     $t3 =     0
+     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
+     $s0 =    10     $s1 =     2     $s2 =     5     $s3 =     0
+     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
+     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
+     $lo =     0     $hi =     0
+
+data memory:
+   data[  0] =     5
+
+
+PC: 9
+inst: syscall
+
+regs:
+   $zero =     0     $at =     0     $v0 =     5     $v1 =     0
+     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
+     $t0 =     1     $t1 =     0     $t2 =     0     $t3 =     0
+     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
+     $s0 =    10     $s1 =     2     $s2 =     5     $s3 =     0
+     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
+     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
+     $lo =     0     $hi =     0
+
+data memory:
+   data[  0] =     5
+
+
+PC: 10
+inst: addu	$s0,$s0,$v0
+
+regs:
+   $zero =     0     $at =     0     $v0 =     5     $v1 =     0
+     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
+     $t0 =     1     $t1 =     0     $t2 =     0     $t3 =     0
+     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
+     $s0 =    15     $s1 =     2     $s2 =     5     $s3 =     0
+     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
+     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
+     $lo =     0     $hi =     0
+
+data memory:
+   data[  0] =     5
+
+
+PC: 11
+inst: addiu	$s1,$s1,1
+
+regs:
+   $zero =     0     $at =     0     $v0 =     5     $v1 =     0
+     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
+     $t0 =     1     $t1 =     0     $t2 =     0     $t3 =     0
+     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
+     $s0 =    15     $s1 =     3     $s2 =     5     $s3 =     0
+     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
+     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
+     $lo =     0     $hi =     0
+
+data memory:
+   data[  0] =     5
+
+
+PC: 12
+inst: j	5
+
+regs:
+   $zero =     0     $at =     0     $v0 =     5     $v1 =     0
+     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
+     $t0 =     1     $t1 =     0     $t2 =     0     $t3 =     0
+     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
+     $s0 =    15     $s1 =     3     $s2 =     5     $s3 =     0
+     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
+     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
+     $lo =     0     $hi =     0
+
+data memory:
+   data[  0] =     5
+
+
+PC: 5
+inst: lw	$s2,0($gp)
+
+regs:
+   $zero =     0     $at =     0     $v0 =     5     $v1 =     0
+     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
+     $t0 =     1     $t1 =     0     $t2 =     0     $t3 =     0
+     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
+     $s0 =    15     $s1 =     3     $s2 =     5     $s3 =     0
+     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
+     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
+     $lo =     0     $hi =     0
+
+data memory:
+   data[  0] =     5
+
+
+PC: 6
+inst: slt	$t0,$s1,$s2
+
+regs:
+   $zero =     0     $at =     0     $v0 =     5     $v1 =     0
+     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
+     $t0 =     1     $t1 =     0     $t2 =     0     $t3 =     0
+     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
+     $s0 =    15     $s1 =     3     $s2 =     5     $s3 =     0
+     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
+     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
+     $lo =     0     $hi =     0
+
+data memory:
+   data[  0] =     5
+
+
+PC: 7
+inst: beq	$t0,$zero,6
+
+regs:
+   $zero =     0     $at =     0     $v0 =     5     $v1 =     0
+     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
+     $t0 =     1     $t1 =     0     $t2 =     0     $t3 =     0
+     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
+     $s0 =    15     $s1 =     3     $s2 =     5     $s3 =     0
+     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
+     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
+     $lo =     0     $hi =     0
+
+data memory:
+   data[  0] =     5
+
+
+PC: 8
+inst: addiu	$v0,$zero,5
+
+regs:
+   $zero =     0     $at =     0     $v0 =     5     $v1 =     0
+     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
+     $t0 =     1     $t1 =     0     $t2 =     0     $t3 =     0
+     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
+     $s0 =    15     $s1 =     3     $s2 =     5     $s3 =     0
+     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
+     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
+     $lo =     0     $hi =     0
+
+data memory:
+   data[  0] =     5
+
+
+PC: 9
+inst: syscall
+
+regs:
+   $zero =     0     $at =     0     $v0 =     5     $v1 =     0
+     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
+     $t0 =     1     $t1 =     0     $t2 =     0     $t3 =     0
+     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
+     $s0 =    15     $s1 =     3     $s2 =     5     $s3 =     0
+     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
+     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
+     $lo =     0     $hi =     0
+
+data memory:
+   data[  0] =     5
+
+
+PC: 10
+inst: addu	$s0,$s0,$v0
+
+regs:
+   $zero =     0     $at =     0     $v0 =     5     $v1 =     0
+     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
+     $t0 =     1     $t1 =     0     $t2 =     0     $t3 =     0
+     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
+     $s0 =    20     $s1 =     3     $s2 =     5     $s3 =     0
+     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
+     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
+     $lo =     0     $hi =     0
+
+data memory:
+   data[  0] =     5
+
+
+PC: 11
+inst: addiu	$s1,$s1,1
+
+regs:
+   $zero =     0     $at =     0     $v0 =     5     $v1 =     0
+     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
+     $t0 =     1     $t1 =     0     $t2 =     0     $t3 =     0
+     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
+     $s0 =    20     $s1 =     4     $s2 =     5     $s3 =     0
+     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
+     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
+     $lo =     0     $hi =     0
+
+data memory:
+   data[  0] =     5
+
+
+PC: 12
+inst: j	5
+
+regs:
+   $zero =     0     $at =     0     $v0 =     5     $v1 =     0
+     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
+     $t0 =     1     $t1 =     0     $t2 =     0     $t3 =     0
+     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
+     $s0 =    20     $s1 =     4     $s2 =     5     $s3 =     0
+     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
+     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
+     $lo =     0     $hi =     0
+
+data memory:
+   data[  0] =     5
+
+
+PC: 5
+inst: lw	$s2,0($gp)
+
+regs:
+   $zero =     0     $at =     0     $v0 =     5     $v1 =     0
+     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
+     $t0 =     1     $t1 =     0     $t2 =     0     $t3 =     0
+     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
+     $s0 =    20     $s1 =     4     $s2 =     5     $s3 =     0
+     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
+     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
+     $lo =     0     $hi =     0
+
+data memory:
+   data[  0] =     5
+
+
+PC: 6
+inst: slt	$t0,$s1,$s2
+
+regs:
+   $zero =     0     $at =     0     $v0 =     5     $v1 =     0
+     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
+     $t0 =     1     $t1 =     0     $t2 =     0     $t3 =     0
+     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
+     $s0 =    20     $s1 =     4     $s2 =     5     $s3 =     0
+     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
+     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
+     $lo =     0     $hi =     0
+
+data memory:
+   data[  0] =     5
+
+
+PC: 7
+inst: beq	$t0,$zero,6
+
+regs:
+   $zero =     0     $at =     0     $v0 =     5     $v1 =     0
+     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
+     $t0 =     1     $t1 =     0     $t2 =     0     $t3 =     0
+     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
+     $s0 =    20     $s1 =     4     $s2 =     5     $s3 =     0
+     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
+     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
+     $lo =     0     $hi =     0
+
+data memory:
+   data[  0] =     5
+
+
+PC: 8
+inst: addiu	$v0,$zero,5
+
+regs:
+   $zero =     0     $at =     0     $v0 =     5     $v1 =     0
+     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
+     $t0 =     1     $t1 =     0     $t2 =     0     $t3 =     0
+     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
+     $s0 =    20     $s1 =     4     $s2 =     5     $s3 =     0
+     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
+     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
+     $lo =     0     $hi =     0
+
+data memory:
+   data[  0] =     5
+
+
+PC: 9
+inst: syscall
+
+regs:
+   $zero =     0     $at =     0     $v0 =     5     $v1 =     0
+     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
+     $t0 =     1     $t1 =     0     $t2 =     0     $t3 =     0
+     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
+     $s0 =    20     $s1 =     4     $s2 =     5     $s3 =     0
+     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
+     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
+     $lo =     0     $hi =     0
+
+data memory:
+   data[  0] =     5
+
+
+PC: 10
+inst: addu	$s0,$s0,$v0
+
+regs:
+   $zero =     0     $at =     0     $v0 =     5     $v1 =     0
+     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
+     $t0 =     1     $t1 =     0     $t2 =     0     $t3 =     0
+     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
+     $s0 =    25     $s1 =     4     $s2 =     5     $s3 =     0
+     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
+     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
+     $lo =     0     $hi =     0
+
+data memory:
+   data[  0] =     5
+
+
+PC: 11
+inst: addiu	$s1,$s1,1
+
+regs:
+   $zero =     0     $at =     0     $v0 =     5     $v1 =     0
+     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
+     $t0 =     1     $t1 =     0     $t2 =     0     $t3 =     0
+     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
+     $s0 =    25     $s1 =     5     $s2 =     5     $s3 =     0
+     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
+     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
+     $lo =     0     $hi =     0
+
+data memory:
+   data[  0] =     5
+
+
+PC: 12
+inst: j	5
+
+regs:
+   $zero =     0     $at =     0     $v0 =     5     $v1 =     0
+     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
+     $t0 =     1     $t1 =     0     $t2 =     0     $t3 =     0
+     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
+     $s0 =    25     $s1 =     5     $s2 =     5     $s3 =     0
+     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
+     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
+     $lo =     0     $hi =     0
+
+data memory:
+   data[  0] =     5
+
+
+PC: 5
+inst: lw	$s2,0($gp)
+
+regs:
+   $zero =     0     $at =     0     $v0 =     5     $v1 =     0
+     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
+     $t0 =     1     $t1 =     0     $t2 =     0     $t3 =     0
+     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
+     $s0 =    25     $s1 =     5     $s2 =     5     $s3 =     0
+     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
+     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
+     $lo =     0     $hi =     0
+
+data memory:
+   data[  0] =     5
+
+
+PC: 6
+inst: slt	$t0,$s1,$s2
+
+regs:
+   $zero =     0     $at =     0     $v0 =     5     $v1 =     0
+     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
+     $t0 =     0     $t1 =     0     $t2 =     0     $t3 =     0
+     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
+     $s0 =    25     $s1 =     5     $s2 =     5     $s3 =     0
+     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
+     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
+     $lo =     0     $hi =     0
+
+data memory:
+   data[  0] =     5
+
+
+PC: 7
+inst: beq	$t0,$zero,6
+
+regs:
+   $zero =     0     $at =     0     $v0 =     5     $v1 =     0
+     $a0 =     0     $a1 =     0     $a2 =     0     $a3 =     0
+     $t0 =     0     $t1 =     0     $t2 =     0     $t3 =     0
+     $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
+     $s0 =    25     $s1 =     5     $s2 =     5     $s3 =     0
+     $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
+     $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
+     $lo =     0     $hi =     0
+
+data memory:
+   data[  0] =     5
+
+
+PC: 13
 inst: addu	$a0,$s0,$zero
 
 regs:
-   $zero =     0     $at =     0     $v0 =   -45     $v1 =     0
-     $a0 =   -45     $a1 =     0     $a2 =     0     $a3 =     0
+   $zero =     0     $at =     0     $v0 =     5     $v1 =     0
+     $a0 =    25     $a1 =     0     $a2 =     0     $a3 =     0
      $t0 =     0     $t1 =     0     $t2 =     0     $t3 =     0
      $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
-     $s0 =   -45     $s1 =     1     $s2 =     0     $s3 =     0
+     $s0 =    25     $s1 =     5     $s2 =     5     $s3 =     0
      $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
      $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
-     $gp =    45     $sp =     0     $fp =     0     $ra =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
      $lo =     0     $hi =     0
 
 data memory:
-   data[  0] =     0
-   data[  1] =     5
-   data[  2] =     6
-   data[  3] =     0
-   data[  4] =     0
-   data[  5] =     0
-   data[  6] =     0
-   data[  7] =     5
-   data[  8] =     5
-   data[  9] =     0
-   data[ 10] =     0
-   data[ 11] =     0
-   data[ 12] =     1
+   data[  0] =     5
 
 
-PC: 41
+PC: 14
 inst: addiu	$v0,$zero,1
 
 regs:
    $zero =     0     $at =     0     $v0 =     1     $v1 =     0
-     $a0 =   -45     $a1 =     0     $a2 =     0     $a3 =     0
+     $a0 =    25     $a1 =     0     $a2 =     0     $a3 =     0
      $t0 =     0     $t1 =     0     $t2 =     0     $t3 =     0
      $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
-     $s0 =   -45     $s1 =     1     $s2 =     0     $s3 =     0
+     $s0 =    25     $s1 =     5     $s2 =     5     $s3 =     0
      $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
      $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
-     $gp =    45     $sp =     0     $fp =     0     $ra =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
      $lo =     0     $hi =     0
 
 data memory:
-   data[  0] =     0
-   data[  1] =     5
-   data[  2] =     6
-   data[  3] =     0
-   data[  4] =     0
-   data[  5] =     0
-   data[  6] =     0
-   data[  7] =     5
-   data[  8] =     5
-   data[  9] =     0
-   data[ 10] =     0
-   data[ 11] =     0
-   data[ 12] =     1
+   data[  0] =     5
 
 
-PC: 42
+PC: 15
 inst: syscall
 
 regs:
    $zero =     0     $at =     0     $v0 =     1     $v1 =     0
-     $a0 =   -45     $a1 =     0     $a2 =     0     $a3 =     0
+     $a0 =    25     $a1 =     0     $a2 =     0     $a3 =     0
      $t0 =     0     $t1 =     0     $t2 =     0     $t3 =     0
      $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
-     $s0 =   -45     $s1 =     1     $s2 =     0     $s3 =     0
+     $s0 =    25     $s1 =     5     $s2 =     5     $s3 =     0
      $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
      $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
-     $gp =    45     $sp =     0     $fp =     0     $ra =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
      $lo =     0     $hi =     0
 
 data memory:
-   data[  0] =     0
-   data[  1] =     5
-   data[  2] =     6
-   data[  3] =     0
-   data[  4] =     0
-   data[  5] =     0
-   data[  6] =     0
-   data[  7] =     5
-   data[  8] =     5
-   data[  9] =     0
-   data[ 10] =     0
-   data[ 11] =     0
-   data[ 12] =     1
+   data[  0] =     5
 
 
-PC: 43
+PC: 16
 inst: addiu	$v0,$zero,10
 
 regs:
    $zero =     0     $at =     0     $v0 =    10     $v1 =     0
-     $a0 =   -45     $a1 =     0     $a2 =     0     $a3 =     0
+     $a0 =    25     $a1 =     0     $a2 =     0     $a3 =     0
      $t0 =     0     $t1 =     0     $t2 =     0     $t3 =     0
      $t4 =     0     $t5 =     0     $t6 =     0     $t7 =     0
-     $s0 =   -45     $s1 =     1     $s2 =     0     $s3 =     0
+     $s0 =    25     $s1 =     5     $s2 =     5     $s3 =     0
      $s4 =     0     $s5 =     0     $s6 =     0     $s7 =     0
      $t8 =     0     $t9 =     0     $k0 =     0     $k1 =     0
-     $gp =    45     $sp =     0     $fp =     0     $ra =     0
+     $gp =    18     $sp =     0     $fp =     0     $ra =     0
      $lo =     0     $hi =     0
 
 data memory:
-   data[  0] =     0
-   data[  1] =     5
-   data[  2] =     6
-   data[  3] =     0
-   data[  4] =     0
-   data[  5] =     0
-   data[  6] =     0
-   data[  7] =     5
-   data[  8] =     5
-   data[  9] =     0
-   data[ 10] =     0
-   data[ 11] =     0
-   data[ 12] =     1
+   data[  0] =     5
 
 
-PC: 44
+PC: 17
 inst: syscall
 exiting simulator
